@@ -9,7 +9,7 @@ The deployment of this code can be found in Brightspace under `Shared Files` in 
         <ul>
             <li>css (The scss that compiles to min.css and css)</li>
             <li>img (All the shared images in templates etc.)</li>
-            <li>js (All the shared images in templates etc.)</li>
+            <li>js (script.js + min.js)</li>
             <li>thirdpartylib
             <ul>
                 <li>animate-css</li>
@@ -33,7 +33,7 @@ Upload the files to the appropriate folder inside `/shared/HTML-Template-Library
 
 ## Developement
 
-Edit files in your favorite IDE and update the repository.
+Edit files in your favorite IDE, update the repository, and upload to Brightspace
 
 ***Recommended:*** 
 1. Visual Studio Code
