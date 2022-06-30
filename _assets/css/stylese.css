@@ -226,88 +226,76 @@ blockquote {
   margin-top: 3.125rem;
   margin-bottom: 3.125rem;
   font-size: 1.25rem;
-  font-weight: bold;
+  font-weight: 700;
   font-style: italic;
 }
 
 blockquote footer {
   font-size: 1.1875rem;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
 }
 
 /*========= Headings ==========*/
-h1,
-.h1,
-h2,
-.h2,
-h3,
-.h3,
-h4,
-.h4,
-h5,
-.h5,
-h6,
-.h6 {
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
   text-align: center;
 }
 
-h1,
-.h1 {
+h1, .h1 {
   color: #494c4e;
   font-family: "Lato", sans-serif;
   font-size: 2.5rem;
   line-height: 3rem;
-  font-weight: bold;
+  font-weight: 700;
   margin-top: 1.875rem;
   margin-bottom: 1.875rem;
 }
 
-h2,
-.h2 {
+h2, .h2 {
   color: #006195;
   font-family: "Lato", sans-serif;
   font-size: 1.875rem;
   line-height: 2.25rem;
-  font-weight: bold;
+  font-weight: 700;
   margin-top: 1.875rem;
   margin-bottom: 1rem;
 }
 
-h3,
-.h3 {
+h3, .h3 {
   color: #494c4e;
   font-family: "Lato", sans-serif;
   font-size: 1.4rem;
   line-height: 2.125rem;
-  font-weight: bold;
+  font-weight: 700;
 }
 
-h4,
-.h4 {
+h4, .h4 {
   color: #494c4e;
   font-family: "Lato", sans-serif;
   font-size: 1.25rem;
   line-height: 2rem;
-  font-weight: bold;
+  font-weight: 700;
 }
 
-h5,
-.h5 {
+h5, .h5 {
   color: #494c4e;
   font-family: "Lato", sans-serif;
   font-size: 1.3125rem;
   line-height: 1.75rem;
-  font-weight: bold;
+  font-weight: 700;
 }
 
-h6,
-.h6 {
+h6, .h6 {
   color: #494c4e;
   font-family: "Lato", sans-serif;
   font-size: 1.25rem;
   line-height: 1.75rem;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 @media (max-width: 992px) {
@@ -1179,17 +1167,15 @@ footer img {
   background-color: #FFFFFF;
   padding: 30px;
 }
-
 .video-wrapper iframe {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   border: 0;
 }
-
 .video-wrapper .video-text {
   color: #000000;
   margin-left: 10px;
@@ -1198,6 +1184,17 @@ footer img {
 video {
   width: 100%;
   height: auto;
+}
+
+/*========= LTI iframe ==========*/
+iframe[src*="type=lti"] {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  border: 0;
 }
 
 /*========= Accordions ==========*/
