@@ -38,3 +38,6 @@ Edit files in your favorite IDE, update the repository, and upload to Brightspac
 ***Recommended:*** 
 1. Visual Studio Code
 2. scss-to-css : https://marketplace.visualstudio.com/items?itemName=yutent.scss-to-css
+    - @ext:yutent.scss-to-css
+        - Compile on Save : on
+        - Output: expanded | compressed
