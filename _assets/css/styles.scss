@@ -182,7 +182,7 @@ html,
 body {
   color: #494c4e;
   font-family: "Lato", sans-serif;
-  font-size: 94%;
+  font-size: 17px; /*94%;*/
 }
 
 /* Setting max width of container-fluid */
@@ -305,22 +305,22 @@ h6, .h6 {
 @media (max-width: 992px) {
   h1,
   .h1 {
-    font-size: 1.875rem;
+    font-size: 1.882rem;
     line-height: 2.25rem;
   }
   h2,
   .h2 {
-    font-size: 1.5rem;
+    font-size: 1.412rem;
     line-height: 1.875rem;
   }
   h3,
   .h3 {
-    font-size: 1.3125rem;
+    font-size: 1.294rem;
     line-height: 1.5rem;
   }
   h4,
   .h4 {
-    font-size: 1.125rem;
+    font-size: 1.176rem;
     line-height: 1.5rem;
   }
   h5,
@@ -333,22 +333,22 @@ h6, .h6 {
 @media (max-width: 768px) {
   h1,
   .h1 {
-    font-size: 1.875rem;
+    font-size: 1.765rem;
     line-height: 2.25rem;
   }
   h2,
   .h2 {
-    font-size: 1.5rem;
+    font-size: 1.412rem;
     line-height: 1.875rem;
   }
   h3,
   .h3 {
-    font-size: 1.3125rem;
+    font-size: 1.294rem;
     line-height: 1.5rem;
   }
   h4,
   .h4 {
-    font-size: 1.125rem;
+    font-size: 1.059rem;
     line-height: 1.5rem;
   }
   h5,
@@ -702,7 +702,6 @@ ul.text-colour-one span:before {
   -webkit-font-smoothing: antialiased;
 }
 
-
 /*========= Text Elements ==========*/
 /* Styling for text elements, for example <p>, <span>, <em> and <strong>. */
 p {
@@ -713,12 +712,12 @@ p {
   /* Tablet and up Sizing - from $screen-md*/
 }
 
-@media screen and (min-width: 768px) {
-  p {
-    font-size: 1.1875rem;
-    line-height: 1.75rem;
-  }
-}
+// @media screen and (min-width: 768px) {
+//   p {
+//     font-size: 1.1875rem;
+//     line-height: 1.75rem;
+//   }
+// }
 
 .lead {
   /* Part of Bootstrap 4. Lead text can be used to begin a topic and would draw learner attention to a critical point, or could be an attention catching fact.*/
@@ -1245,7 +1244,7 @@ iframe[src*="type=lti"] {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 32vh;
   border: 0;
 }
 

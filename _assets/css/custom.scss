@@ -390,6 +390,7 @@ h2 {
         background-color: var(--sakai-color-gray--lighter-7);
         text-align: left;
         padding: 0.4em;
+        font-size: 24px;
     }
 }
 
@@ -460,7 +461,7 @@ $img_size: 100px;
             box-shadow: 4px 4px 0 rgb(0 0 0 / 20%);
             float: left; 
             width: 60.0%; 
-            font-size: 1.2rem;
+            font-size: 1.176rem;
             line-height: 1.3;
             margin-bottom: 20.0px; 
             margin-left: 0.0px; 
@@ -517,8 +518,8 @@ $img_size: 100px;
             }
 
             p {
-                font-size: 1rem;
-                line-height: 1.1;
+                font-size: 0.941rem;
+                line-height: 1.1rem;
             }
         }
     }

@@ -149,4 +149,28 @@ $.each($(".tab-content > .tab-pane"), (function (index, value) {
    });
 }));
 
- /** Video JavaScript **/
+/** Video JavaScript **/
+// function displayMessage(event) {
+//    console.log('displayMessage');
+//    console.log(event);
+// }
+
+// //   if (event.origin !== "http://example.org:8080")
+// //     return;
+
+// //     window.top.postMessage(JSON.stringify({
+// //         subject: "lti.frameResize",
+// //         height: document.body.clientHeight + 40,
+// //         url: window.location.href
+// //       }), "*");
+// //   // …
+
+// if (window.addEventListener) {
+//    // For standards-compliant web browsers
+//    window.addEventListener("message", displayMessage, false);
+//    window.addEventListener("lti.frameResize", displayMessage, false);
+// } else {
+//    window.attachEvent("onmessage", displayMessage);
+// }
+
+// console.log('loaded scripts');
