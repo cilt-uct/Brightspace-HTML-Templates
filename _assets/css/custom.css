@@ -274,12 +274,22 @@ h1.lessontitle {
   text-align: center;
 }
 
+h2 {
+  margin-top: 2.75rem;
+  margin-bottom: 1.2rem;
+}
 h2.sectionheader {
   color: var(--sakai-primary-color-1);
   background-color: var(--sakai-color-gray--lighter-7);
   text-align: left;
   padding: 0.4em;
   font-size: 24px;
+}
+h2 > span > img {
+  display: inline-block;
+  width: 64px;
+  position: relative;
+  top: -8px;
 }
 
 h4, h5, h6 {
@@ -405,7 +415,22 @@ table.table-bordered th, table.table-bordered td {
 .alert {
   font-size: 1rem;
 }
+.alert div:first-child > span > img, .alert .star img {
+  width: 35px;
+  display: inline-block;
+  position: relative;
+  margin-right: 6px;
+  top: -4px;
+}
 
+.alert-info div:first-child > span > img, .alert-info .lightbulb img {
+  width: 40px;
+  position: relative;
+  display: block;
+  margin-right: 10px;
+  top: -20px;
+  left: -5px;
+}
 .alert-info .fa-2x.fa-lightbulb {
   position: relative;
   top: -5px;
@@ -432,12 +457,26 @@ h3.callout-title {
 .panel .panel-body {
   padding: 15px;
 }
+.panel h3.callout-title span > img {
+  width: 35px;
+  display: inline-block;
+  position: relative;
+  margin-right: 6px;
+  top: -4px;
+}
 
 .panel-danger .fa-exclamation-triangle, .panel-danger .contentReviewIconWarn {
   font-size: 1.6em;
   position: relative;
   top: 4px;
   padding-right: 6px;
+}
+.panel-danger h3.callout-title span > img {
+  width: 35px;
+  display: inline-block;
+  position: relative;
+  margin-right: 6px;
+  top: -4px;
 }
 
 .panel-primary {
