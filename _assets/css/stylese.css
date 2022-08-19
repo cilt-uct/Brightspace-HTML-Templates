@@ -1056,6 +1056,45 @@ footer img {
   max-height: 125px;
 }
 
+footer.uct {
+  padding: 0;
+  /* background-image: linear-gradient(to left, #00a9ee, #1c8acd, #236dac, #23518b, #1e376a); */
+  border-top: 3px solid #1F376A;
+  height: 60px;
+  /* border-radius: 12px; */
+  margin: 3.125rem 1rem 0.5rem;
+}
+footer.uct img {
+  position: absolute;
+}
+footer.uct img.left {
+  height: 40px;
+  left: 4%;
+  margin-top: 5px;
+}
+footer.uct img.right {
+  height: 40px;
+  margin-top: 10px;
+  right: 4%;
+}
+
+@media (max-width: 550px) {
+  footer.uct {
+    text-align: center;
+    margin: 0px;
+  }
+  footer.uct img.left {
+    display: none;
+  }
+  footer.uct img.right {
+    position: relative;
+    top: 20%;
+    margin-top: 10px;
+    height: 1.6rem;
+    margin: auto;
+    right: 0;
+  }
+}
 /*========= Icons ==========*/
 /*========= Images ==========*/
 /*========= Jumbotrons ==========*/
