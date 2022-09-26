@@ -1,0 +1,175 @@
+@media (min-width: 1230px) {
+  .d2l-page-main .d2l-page-main-padding {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+}
+.d2l-page-main .d2l-page-main-padding {
+  padding: 0px;
+}
+.d2l-page-main .d2l-page-main-padding .d2l-htmlblock-wc {
+  margin-bottom: 0px !important;
+}
+
+.d2l-navigation-header-left {
+  overflow: inherit;
+}
+
+.d2l-navigation-header-right > img {
+  width: 260px;
+  height: 40px;
+}
+.d2l-navigation-header-right::before {
+  position: absolute;
+  content: "";
+  width: 1px;
+  height: 40px;
+  background-color: #aaa;
+  right: 310px;
+  top: 50%;
+  margin-top: -20px;
+}
+
+@media (max-width: 650px) {
+  .d2l-navigation-header-right > img {
+    display: none;
+  }
+  .d2l-navigation-header-right::before {
+    display: none;
+  }
+}
+.d2l-login-portal-flex {
+  display: none;
+}
+
+.d2l-login-portal-flex.modal-login {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.4);
+  z-index: 1000;
+}
+.d2l-login-portal-flex.modal-login > div .d2l-login-portal-login {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1010;
+  box-shadow: 6px 7px 7px 0px rgba(0, 0, 0, 0.36);
+  -webkit-box-shadow: 6px 7px 7px 0px rgba(0, 0, 0, 0.36);
+  -moz-box-shadow: 6px 7px 7px 0px rgba(0, 0, 0, 0.36);
+}
+
+#uct-login-page {
+  background-color: #303662;
+  background-image: url("/shared/public/background-min.png");
+}
+#uct-login-page #uct-container {
+  padding: 3rem 0px;
+  position: relative;
+}
+#uct-login-page #uct-container #lines {
+  width: 80px;
+  position: absolute;
+  z-index: 1000;
+  top: 8%;
+  left: calc(50% - 40px);
+}
+#uct-login-page #uct-container > #modal-outer {
+  border-radius: 10px;
+  background: white;
+  margin: auto;
+  width: 500px;
+  overflow: hidden;
+  text-align: center;
+}
+#uct-login-page #uct-container > #modal-outer > #modal-inner {
+  border-bottom: 6px solid #62c39d;
+}
+#uct-login-page #uct-container .body {
+  margin: auto;
+  width: 80%;
+}
+#uct-login-page #uct-container .body div {
+  text-align: center;
+}
+#uct-login-page #uct-container .body .title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 38px;
+  margin-top: 2.8rem;
+  color: #52429b;
+  border-top: 1px solid #a09d9e;
+}
+#uct-login-page #uct-container .body .sub-title {
+  text-align: center;
+  font-size: 22px;
+  color: #444;
+  margin-bottom: 1rem;
+}
+#uct-login-page #uct-container .body .d2l-button {
+  text-decoration: none !important;
+  background-color: #1e366a;
+  color: #fff;
+  border-radius: calc(2rem + 2px);
+  border-style: none;
+  border-width: 1px;
+  box-shadow: 0 0 0 4px transparent;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: bold;
+  letter-spacing: 0.2px;
+  line-height: 1rem;
+  margin: 0px 0.55rem;
+  min-height: calc(2rem + 2px);
+  outline: none;
+  padding: 0.55rem 1.5rem;
+  text-align: center;
+  text-transform: uppercase;
+  transition: box-shadow 0.2s;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+#uct-login-page #uct-container .body .footer {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 1rem;
+  margin-bottom: 0.3rem;
+}
+#uct-login-page #uct-container .body .footer a {
+  color: #444;
+}
+
+@media (max-width: 550px) {
+  #uct-login-page {
+    background-color: #fff;
+    background-image: none;
+  }
+  #uct-login-page #uct-container > #modal-outer {
+    width: 100%;
+  }
+  #uct-login-page #uct-container > #modal-outer > #modal-inner {
+    border-bottom-width: 0px;
+  }
+  #uct-login-page .body {
+    width: 100%;
+    padding: 0px 10px;
+  }
+  #uct-login-page .body .title {
+    font-size: 1.5rem;
+    border-top-width: 0px;
+  }
+  #uct-login-page .body .sub-title {
+    font-size: 0.9rem;
+  }
+}
