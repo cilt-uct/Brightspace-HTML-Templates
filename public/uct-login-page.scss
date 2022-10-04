@@ -74,9 +74,26 @@
             box-shadow: 6px 7px 7px 0px rgba(0,0,0,0.36);
             -webkit-box-shadow: 6px 7px 7px 0px rgba(0,0,0,0.36);
             -moz-box-shadow: 6px 7px 7px 0px rgba(0,0,0,0.36);
+
+            animation-name: fadeIn, slide-in;
+            animation-duration: 240ms, 480ms;
         }
     }
 }
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes slide-in {
+    from {
+        top: 20%;
+    }
+    to {
+        top: 50%;
+    }
+  }
 
 #uct-login-page {
     background-color: #303662;
@@ -130,7 +147,7 @@
 
             .d2l-button {
                 text-decoration: none !important; 
-                background-color: #1e366a; 
+                background-color: rgb(0, 111, 191); //#1e366a;
                 color: #fff; 
                 border-radius: calc(2rem + 2px); 
                 border-style: none; 
@@ -154,15 +171,29 @@
                 user-select: none; 
                 vertical-align: middle; 
                 white-space: nowrap;
+
+                &:hover, &:active {
+                    background-color: rgb(0, 68, 137);// #2e52a1;
+                }
+
+                &#btn_guest_login, &.d2l-cancel-button {
+                    filter: grayscale(1);
+                }
             }
 
             .footer {
+                display: flex;
+                justify-content: space-around;
+                flex-direction: column;
+
                 text-align: center; 
                 font-size: 14px; 
                 margin-top: 1rem; 
                 margin-bottom: 0.3rem;
+                
 
                 a {
+                    margin-bottom: 0.7rem;  
                     color: #444;
                 }
             }
@@ -196,6 +227,9 @@
             .sub-title {
                 font-size: 0.9rem;
             }
+
+            // .footer {
+            // }
         }
     }
 }
