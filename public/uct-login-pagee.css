@@ -196,6 +196,9 @@
   margin-bottom: 0.7rem;
   color: #444;
 }
+#uct-login-page #uct-container .body .footer a#btn_guest_login {
+  text-decoration: underline;
+}
 
 @media (max-width: 550px) {
   #uct-login-page {

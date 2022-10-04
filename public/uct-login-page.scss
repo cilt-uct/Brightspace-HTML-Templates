@@ -195,6 +195,10 @@
                 a {
                     margin-bottom: 0.7rem;  
                     color: #444;
+
+                    &#btn_guest_login {
+                        text-decoration: underline;
+                    }
                 }
             }
         }
