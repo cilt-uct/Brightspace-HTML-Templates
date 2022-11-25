@@ -5108,6 +5108,8 @@ a.badge-dark:focus, a.badge-dark.focus {
   margin-bottom: 1rem;
   border: 1px solid transparent;
   border-radius: 0.25rem;
+  border-right: 4px solid #ed6b62;
+  border-radius:none;
 }
 
 .alert-heading {
@@ -5174,8 +5176,8 @@ a.badge-dark:focus, a.badge-dark.focus {
 
 .alert-info {
   color: #0c5460;
-  background-color: #d1ecf1;
-  border-color: #bee5eb;
+  background-color: #223264;
+  border-color: #FFF;
 }
 
 .alert-info hr {

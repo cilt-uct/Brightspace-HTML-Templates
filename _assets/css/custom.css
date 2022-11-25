@@ -12,7 +12,7 @@
   --sakai-brand--lighter-3: #5c9abb;
   --sakai-brand--lighter-2: #3985ad;
   --sakai-brand--lighter-1: #176f9f;
-  --sakai-brand: #006195;
+  --sakai-brand: #223264;
   --sakai-brand--darker-1: #005888;
   --sakai-brand--darker-2: #004b73;
   --sakai-brand--darker-3: #003e5f;
@@ -20,6 +20,10 @@
   --sakai-brand--darker-5: #002437;
   --sakai-brand--darker-6: #001723;
   --sakai-brand--darker-7: #000a0f;
+  --amathuba-coral: #ed6b62;
+  --amathuba-green: #6cbe99;
+  --amthuba-coral-light: rgb(243 113 103 / 60%);
+  --amathuba-green-light: rgb(100 194 156 / 60%);
   --sakai-primary-color-1: var(--sakai-brand);
   --sakai-primary-color-2: var(--sakai-brand--darker-2);
   --sakai-primary-color-3: var(--sakai-brand--darker-3);
@@ -260,9 +264,13 @@
     margin-left: 5.333333%;
   }
 }
-h1, h2, h3, h4, h5, h6 {
+h1 {
   color: var(--sakai-primary-color-1);
   text-align: center;
+}
+h2, h3, h4, h5, h6 {
+  color: var(--sakai-primary-color-1);
+  text-align: left;
 }
 h1 > span.fas, h1 > span.fa, h2 > span.fas, h2 > span.fa, h3 > span.fas, h3 > span.fa, h4 > span.fas, h4 > span.fa, h5 > span.fas, h5 > span.fa, h6 > span.fas, h6 > span.fa {
   position: relative;
