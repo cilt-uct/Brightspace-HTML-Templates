@@ -175,7 +175,8 @@ $theme-color-interval: 9 !default;
     --sakai-color-white: hsl(0, 0%, 100%);
     --sakai-color-black: hsl(0, 0%, 0%);
 
-    @include defineColorHSL(--sakai-brand, 201, 100%, 29.2%);
+    @include defineColorHSL(--sakai-brand, 225, 50%, 26%);
+
 
     --sakai-primary-color-1: var(--sakai-brand);
     --sakai-primary-color-2: var(--sakai-brand--darker-2);
@@ -369,7 +370,7 @@ $theme-color-interval: 9 !default;
 
 h1, h2, h3, h4, h5, h6 {
     color: var(--sakai-primary-color-1);
-    text-align: center;
+  
 
     & > span.fas, & > span.fa {
         position: relative;
@@ -399,8 +400,10 @@ h2 {
     & > span > img {
         display: inline-block;
         width: 64px;
+        height: 64px;
         position: relative;
         top: -8px;
+        margin-right:5px;
     }
 }
 
@@ -461,6 +464,10 @@ $img_size: 100px;
             float: left; 
             margin: 0.0px 5.0px; 
             border-radius: 50.0%; 
+            border: 3px solid #0099FF;
+            padding: 4px;
+            border-bottom: 4px solid #223264 !important;
+            border-left: 4px solid #223264 !important;
         }
 
         p {
@@ -468,15 +475,16 @@ $img_size: 100px;
             color: var(--sakai-color-white);
             padding: 15.0px; 
             border-radius: 8.0px;
-            box-shadow: 4px 4px 0 rgb(0 0 0 / 20%);
+          /*  box-shadow: 4px 4px 0 rgb(0 0 0 / 20%); */
             float: left; 
-            width: 60.0%; 
-            font-size: 1.176rem;
-            line-height: 1.3;
+            width: 75.0%; 
+           line-height: 1.3;
             margin-bottom: 20.0px; 
             margin-left: 0.0px; 
             margin-top: 0px;
             position: relative;
+     
+            border-bottom: 4px solid #0099FF;
         }
     }
 
@@ -524,7 +532,7 @@ $img_size: 100px;
             }
 
             img { 
-                display: none;
+                margin-bottom:10px;
             }
 
             p {
@@ -679,3 +687,37 @@ blockquote {
 	border-left: 2px solid #000000;
 	padding-left: 1.25rem;
 }
+
+
+.biotron {
+    background-color:  #2b3463; 
+      border-left: 10px solid #0099FF ;
+           padding: 1rem;
+      color: #FFFFFF;
+      margin: 1.5rem 0;
+           border-radius:0 
+       }
+
+
+       .biotron img {
+
+width: 40px;
+margin-top:5px;
+       }
+
+       .biotron p {
+
+        margin-bottom:0px;
+       }
+  
+// Code to change the width of the module intro 
+
+//        .col-12 ~ .offset-md-2 {
+//     margin-left: 5.333333%;
+  
+//  }
+
+//  .col-12 ~ .col-md-8 {
+//  flex: 0 0 89.333333%;
+//  max-width: 89.333333%;
+//  }

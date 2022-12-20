@@ -182,7 +182,7 @@ html,
 body {
   color: #494c4e;
   font-family: "Lato", sans-serif;
-  font-size: 17px; /*94%;*/
+  font-size: 100%; 
 }
 
 /* Setting max width of container-fluid */
@@ -217,8 +217,10 @@ img {
 
 /* Hides the source backgroung image for elements using the backgroundimage.js script */
 .bg-img-wrapper {
-  background-size: cover;
-}
+
+ background-size: cover;
+   
+  }
 
 .bg-img-wrapper img:first-child {
   display: none;
@@ -241,13 +243,16 @@ blockquote footer {
 }
 
 /*========= Headings ==========*/
-h1, .h1,
+h1, .h1 {
+  text-align: center;
+}
+
 h2, .h2,
 h3, .h3,
 h4, .h4,
 h5, .h5,
 h6, .h6 {
-  text-align: center;
+  text-align: left;
 }
 
 h1, .h1 {
@@ -302,33 +307,68 @@ h6, .h6 {
   font-weight: 700;
 }
 
+
+// Have converted font sizes to the original so that the sizes are neat in PX
+
 @media (max-width: 992px) {
   h1,
-  .h1 {
-    font-size: 1.882rem;
+.h1 {
+    font-size: 1.875rem;
     line-height: 2.25rem;
   }
+
   h2,
-  .h2 {
-    font-size: 1.412rem;
+.h2 {
+    font-size: 1.5rem;
     line-height: 1.875rem;
   }
+
   h3,
-  .h3 {
-    font-size: 1.294rem;
+.h3 {
+    font-size: 1.3125rem;
     line-height: 1.5rem;
   }
+
   h4,
-  .h4 {
-    font-size: 1.176rem;
+.h4 {
+    font-size: 1.125rem;
     line-height: 1.5rem;
   }
+
   h5,
-  .h5 {
+.h5 {
     font-size: 1rem;
     line-height: 1.5rem;
   }
 }
+
+// @media (max-width: 992px) {
+//   h1,
+//   .h1 {
+//     font-size: 1.882rem;
+//     line-height: 2.25rem;
+//   }
+//   h2,
+//   .h2 {
+//     font-size: 1.412rem;
+//     line-height: 1.875rem;
+//   }
+//   h3,
+//   .h3 {
+//     font-size: 1.294rem;
+//     line-height: 1.5rem;
+//   }
+//   h4,
+//   .h4 {
+//     font-size: 1.176rem;
+//     line-height: 1.5rem;
+//   }
+//   h5,
+//   .h5 {
+//     font-size: 1rem;
+//     line-height: 1.5rem;
+//   }
+// }
 
 @media (max-width: 768px) {
   h1,
@@ -586,7 +626,7 @@ ol.large-number {
         &:before {
             content: counter(item) ". ";
             counter-increment: item;
-            color: #006195;
+            color: var(--sakai-primary-color-1);
             left: -2.25rem;
             margin: 8px 8px 0 0;
             position: absolute;
@@ -712,12 +752,14 @@ p {
   /* Tablet and up Sizing - from $screen-md*/
 }
 
-// @media screen and (min-width: 768px) {
-//   p {
-//     font-size: 1.1875rem;
-//     line-height: 1.75rem;
-//   }
-// }
+@media screen and (min-width: 768px) {
+
+   p {
+    font-size: 1.1875rem; 
+    //  font-size: 1.0625rem; 
+     line-height: 1.75rem;
+ }
+ }
 
 .lead {
   /* Part of Bootstrap 4. Lead text can be used to begin a topic and would draw learner attention to a critical point, or could be an attention catching fact.*/
@@ -816,9 +858,12 @@ hr {
 
 .intersect-wrapper .intersect-content {
   background: #FFFFFF;
-  margin: 15% auto auto;
-  padding: 1.875rem 0 0.9375rem;
+
+   margin: 8% auto auto;
+  padding: 1.4rem 0 0.9375rem; 
+
   overflow: hidden;
+
 }
 
 .fullscreen-splash .overlay-content {
@@ -1023,9 +1068,10 @@ figure figcaption {
 
 figure img {
   display: inline-block;
-  max-width: 100%;
+
   height: auto;
   border: 0;
+
 }
 
 figure.float-left {
@@ -1114,7 +1160,7 @@ footer img {
 footer.uct {
   padding: 0;
   /* background-image: linear-gradient(to left, #00a9ee, #1c8acd, #236dac, #23518b, #1e376a); */
-  border-top: 3px solid #1F376A;
+  border-top: 2px solid #1F376A;
   height: 60px;
   /* border-radius: 12px; */
   margin: 3.125rem 1rem 0.5rem;
@@ -1480,6 +1526,7 @@ button.btn-secondary:disabled:hover, button.btn-secondary[aria-expanded="true"]:
   padding: 1.25rem;
   border-color: #CDD5DC;
   background: #F7F7F7;
+ 
 }
 
 @media screen and (max-width: 768px) {
@@ -1499,8 +1546,9 @@ button.btn-secondary:disabled:hover, button.btn-secondary[aria-expanded="true"]:
 }
 
 .list-group-item.active {
-  background-color: #006FBF;
-  border-color: #006FBF;
+  background-color: var(--sakai-primary-color-1);
+  border-color:  var(--sakai-primary-color-1);
+  color:#fff !important;
 }
 
 /*** Vertical Tabs 
@@ -1717,7 +1765,9 @@ button.btn-secondary:disabled:hover, button.btn-secondary[aria-expanded="true"]:
   
   h3 { 
     text-align: left; 
-    color:#006195; 
+    color:var(--sakai-primary-color-1);
+    font-size: 1.1rem;
+    font-weight: 600;
   }
 
   & .far::before, & .fas::before {
@@ -1726,13 +1776,24 @@ button.btn-secondary:disabled:hover, button.btn-secondary[aria-expanded="true"]:
 
   img {
     display: inline-block;
-    max-width: 100%;
-    height: auto;
+   height: 240px;
     border: none;
     border-radius: 50%;
+    padding:4px;
+    width:240px;
+    border-left: 4px solid rgb(34, 50, 100);
+    border-right: 4px solid #0099FF;
+    border-bottom: 4px solid rgb(34, 50, 100) ;
+    border-top: 4px solid #0099FF ;
+    object-fit:cover;
+  
+    
+   
   }
     
   figure {
     border:none;
+   
   }
+
 }
