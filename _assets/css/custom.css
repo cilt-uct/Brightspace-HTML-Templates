@@ -12,7 +12,7 @@
   --sakai-brand--lighter-3: #5c9abb;
   --sakai-brand--lighter-2: #3985ad;
   --sakai-brand--lighter-1: #176f9f;
-  --sakai-brand: #006195;
+  --sakai-brand: hsl(201, 100%, 29.2%);
   --sakai-brand--darker-1: #005888;
   --sakai-brand--darker-2: #004b73;
   --sakai-brand--darker-3: #003e5f;
@@ -220,7 +220,7 @@
 }
 :root .sakai-colorize--sakai-brand {
   color: #fff;
-  background-color: #006195;
+  background-color: hsl(201, 100%, 29.2%);
 }
 :root .sakai-colorize--sakai-brand--darker-1 {
   color: #b8d3e1;
@@ -602,4 +602,4 @@ h3.callout-title {
 blockquote {
   border-left: 2px solid #000000;
   padding-left: 1.25rem;
-}
+}/*# sourceMappingURL=custom.css.map */

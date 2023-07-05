@@ -178,8 +178,7 @@ html,
 body {
   color: #494c4e;
   font-family: "Lato", sans-serif;
-  font-size: 17px;
-  /*94%;*/
+  font-size: 100%;
 }
 
 /* Setting max width of container-fluid */
@@ -208,13 +207,12 @@ pre.card code {
 
 /* Set images to resize by default */
 img {
-  max-width: 100%;
   height: auto;
 }
 
 /* Hides the source backgroung image for elements using the backgroundimage.js script */
 .bg-img-wrapper {
-  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .bg-img-wrapper img:first-child {
@@ -238,13 +236,16 @@ blockquote footer {
 }
 
 /*========= Headings ==========*/
-h1, .h1,
+h1, .h1 {
+  text-align: center;
+}
+
 h2, .h2,
 h3, .h3,
 h4, .h4,
 h5, .h5,
 h6, .h6 {
-  text-align: center;
+  text-align: left;
 }
 
 h1, .h1 {
@@ -301,62 +302,54 @@ h6, .h6 {
 
 @media (max-width: 992px) {
   h1,
-.h1 {
-    font-size: 1.882rem;
+  .h1 {
+    font-size: 1.875rem;
     line-height: 2.25rem;
   }
-
   h2,
-.h2 {
-    font-size: 1.412rem;
+  .h2 {
+    font-size: 1.5rem;
     line-height: 1.875rem;
   }
-
   h3,
-.h3 {
-    font-size: 1.294rem;
+  .h3 {
+    font-size: 1.3125rem;
     line-height: 1.5rem;
   }
-
   h4,
-.h4 {
-    font-size: 1.176rem;
+  .h4 {
+    font-size: 1.125rem;
     line-height: 1.5rem;
   }
-
   h5,
-.h5 {
+  .h5 {
     font-size: 1rem;
     line-height: 1.5rem;
   }
 }
 @media (max-width: 768px) {
   h1,
-.h1 {
+  .h1 {
     font-size: 1.765rem;
     line-height: 2.25rem;
   }
-
   h2,
-.h2 {
+  .h2 {
     font-size: 1.412rem;
     line-height: 1.875rem;
   }
-
   h3,
-.h3 {
+  .h3 {
     font-size: 1.294rem;
     line-height: 1.5rem;
   }
-
   h4,
-.h4 {
+  .h4 {
     font-size: 1.059rem;
     line-height: 1.5rem;
   }
-
   h5,
-.h5 {
+  .h5 {
     font-size: 1rem;
     line-height: 1.5rem;
   }
@@ -400,11 +393,13 @@ ul {
   font-size: 1rem;
   padding-left: 1.25rem;
   margin-left: 0.625rem;
+  list-style-position: outside;
+  overflow: hidden;
 }
 
 @media screen and (min-width: 768px) {
   ol,
-ul {
+  ul {
     font-size: 1.1875rem;
   }
 }
@@ -586,7 +581,7 @@ ol.large-number li {
 ol.large-number li:before {
   content: counter(item) ". ";
   counter-increment: item;
-  color: #006195;
+  color: var(--sakai-primary-color-1);
   left: -2.25rem;
   margin: 8px 8px 0 0;
   position: absolute;
@@ -698,6 +693,12 @@ p {
   /* Tablet and up Sizing - from $screen-md*/
 }
 
+@media screen and (min-width: 768px) {
+  p {
+    font-size: 1.1875rem;
+    line-height: 1.75rem;
+  }
+}
 .lead {
   /* Part of Bootstrap 4. Lead text can be used to begin a topic and would draw learner attention to a critical point, or could be an attention catching fact.*/
   font-size: 1.3125rem;
@@ -793,8 +794,8 @@ hr {
 
 .intersect-wrapper .intersect-content {
   background: #FFFFFF;
-  margin: 15% auto auto;
-  padding: 1.875rem 0 0.9375rem;
+  margin: 8% auto auto;
+  padding: 1.4rem 0.9375rem;
   overflow: hidden;
 }
 
@@ -901,7 +902,6 @@ hr {
   margin-right: 1.25rem;
   order: 0;
   flex: 0 1 auto;
-  -ms-grid-row-align: auto;
   align-self: auto;
   padding: 0.625rem;
   top: 0;
@@ -964,7 +964,6 @@ figure figcaption {
 
 figure img {
   display: inline-block;
-  max-width: 100%;
   height: auto;
   border: 0;
 }
@@ -1001,23 +1000,18 @@ figure.float-right {
   figure {
     margin-bottom: 0;
   }
-
   .img-200 {
     max-width: 20%;
   }
-
   .img-300 {
     max-width: 30%;
   }
-
   .img-400 {
     max-width: 50%;
   }
-
   .img-500 {
     max-width: 60%;
   }
-
   .img-600 {
     max-width: 66%;
   }
@@ -1026,15 +1020,12 @@ figure.float-right {
   .img-300 {
     max-width: 300px;
   }
-
   .img-400 {
     max-width: 400px;
   }
-
   .img-500 {
     max-width: 500px;
   }
-
   .img-600 {
     max-width: 550px;
   }
@@ -1059,7 +1050,7 @@ footer img {
 footer.uct {
   padding: 0;
   /* background-image: linear-gradient(to left, #00a9ee, #1c8acd, #236dac, #23518b, #1e376a); */
-  border-top: 3px solid #1F376A;
+  border-top: 2px solid #1F376A;
   height: 60px;
   /* border-radius: 12px; */
   margin: 3.125rem 1rem 0.5rem;
@@ -1425,7 +1416,6 @@ button.btn-secondary:disabled:hover, button.btn-secondary[aria-expanded=true]:ho
     margin-bottom: 0;
     border-right: none;
   }
-
   .list-group-item:last-child {
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
@@ -1437,8 +1427,9 @@ button.btn-secondary:disabled:hover, button.btn-secondary[aria-expanded=true]:ho
 }
 
 .list-group-item.active {
-  background-color: #006FBF;
-  border-color: #006FBF;
+  background-color: var(--sakai-primary-color-1);
+  border-color: var(--sakai-primary-color-1);
+  color: #fff !important;
 }
 
 /*** Vertical Tabs 
@@ -1513,7 +1504,6 @@ button.btn-secondary:disabled:hover, button.btn-secondary[aria-expanded=true]:ho
     border-top-right-radius: 0;
     border-bottom-left-radius: 0;
   }
-
   .list-group.flex-md-row .list-group-item:last-child {
     border-top-right-radius: 0.25rem;
     border-right: none;
@@ -1632,14 +1622,12 @@ button.btn-secondary:disabled:hover, button.btn-secondary[aria-expanded=true]:ho
   .accordion .collapse:not(.show) {
     display: block;
   }
-
   .tab-content > .tab-pane {
     opacity: 1;
     display: block;
     border: 2px solid #CDD5DC;
     padding: 15px;
   }
-
   .fade:not(.show) {
     opacity: 1;
   }
@@ -1652,18 +1640,27 @@ button.btn-secondary:disabled:hover, button.btn-secondary[aria-expanded=true]:ho
 }
 .bio h3 {
   text-align: left;
-  color: #006195;
+  color: var(--sakai-primary-color-1);
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 .bio .far::before, .bio .fas::before {
   color: var(--sakai-primary-color-1);
 }
 .bio img {
   display: inline-block;
-  max-width: 100%;
-  height: auto;
+  height: 240px;
   border: none;
   border-radius: 50%;
+  padding: 4px;
+  width: 240px;
+  border-left: 4px solid rgb(34, 50, 100);
+  border-right: 4px solid #0099FF;
+  border-bottom: 4px solid rgb(34, 50, 100);
+  border-top: 4px solid #0099FF;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .bio figure {
   border: none;
-}
+}/*# sourceMappingURL=styles.css.map */
