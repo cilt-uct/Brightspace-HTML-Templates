@@ -182,7 +182,7 @@ html,
 body {
   color: #494c4e;
   font-family: "Lato", sans-serif;
-  font-size: 100%; 
+  font-size: 100%;
 }
 
 /* Setting max width of container-fluid */
@@ -274,7 +274,7 @@ h2, .h2 {
 }
 
 h3, .h3 {
- color: #494c4e; 
+ color: #494c4e;
   font-family: 'Lato', sans-serif;
   font-size: 1.4rem;
   line-height: 2.125rem;
@@ -663,7 +663,7 @@ ol.large-number {
         }
     }
 
-    ul { 
+    ul {
         li:before {
             content: "\2022";
         }
@@ -755,8 +755,8 @@ p {
 @media screen and (min-width: 768px) {
 
    p {
-    font-size: 1.1875rem; 
-    //  font-size: 1.0625rem; 
+    font-size: 1.1875rem;
+    //  font-size: 1.0625rem;
      line-height: 1.75rem;
  }
  }
@@ -859,7 +859,7 @@ hr {
 .intersect-wrapper .intersect-content {
   background: #FFFFFF;
   margin: 8% auto auto;
-  padding: 1.4rem 0.9375rem; 
+  padding: 1.4rem 0.9375rem;
   overflow: hidden;
 }
 
@@ -1164,13 +1164,13 @@ footer.uct {
 
   img {
     position: absolute;
-    
+
     &.left {
       height: 40px;
       left: 4%;
       margin-top: 5px;
     }
-    
+
     &.right {
       height: 40px;
       margin-top: 10px;
@@ -1303,7 +1303,7 @@ footer.uct {
   border: 1px solid #B9C2D0;
   background-color: #FFFFFF;
   padding: 30px;
-  
+
   iframe {
     position: absolute;
     top: 0;
@@ -1332,7 +1332,7 @@ iframe[src*="type=lti"] {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 32vh;
+  height: max(50vh, 400px);
   border: 0;
 }
 
@@ -1523,7 +1523,7 @@ button.btn-secondary:disabled:hover, button.btn-secondary[aria-expanded="true"]:
   padding: 1.25rem;
   border-color: #CDD5DC;
   background: #F7F7F7;
- 
+
 }
 
 @media screen and (max-width: 768px) {
@@ -1548,7 +1548,7 @@ button.btn-secondary:disabled:hover, button.btn-secondary[aria-expanded="true"]:
   color:#fff !important;
 }
 
-/*** Vertical Tabs 
+/*** Vertical Tabs
 
 .tabs-vertical {
    border: 2px solid $grey-three;
@@ -1753,15 +1753,15 @@ button.btn-secondary:disabled:hover, button.btn-secondary[aria-expanded="true"]:
 
 /*========= Staff bio page ==========*/
 .bio {
-  
-  h2 { 
+
+  h2 {
     text-align: left;
     margin-top:0.5rem;
-    margin-bottom: 0.5rem; 
+    margin-bottom: 0.5rem;
   }
-  
-  h3 { 
-    text-align: left; 
+
+  h3 {
+    text-align: left;
     color:var(--sakai-primary-color-1);
     font-size: 1.1rem;
     font-weight: 600;
@@ -1783,14 +1783,14 @@ button.btn-secondary:disabled:hover, button.btn-secondary[aria-expanded="true"]:
     border-bottom: 4px solid rgb(34, 50, 100) ;
     border-top: 4px solid #0099FF ;
     object-fit:cover;
-  
-    
-   
+
+
+
   }
-    
+
   figure {
     border:none;
-   
+
   }
 
 }

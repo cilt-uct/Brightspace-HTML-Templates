@@ -1218,7 +1218,7 @@ iframe[src*="type=lti"] {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 32vh;
+  height: max(50vh, 400px);
   border: 0;
 }
 
@@ -1432,7 +1432,7 @@ button.btn-secondary:disabled:hover, button.btn-secondary[aria-expanded=true]:ho
   color: #fff !important;
 }
 
-/*** Vertical Tabs 
+/*** Vertical Tabs
 
 .tabs-vertical {
    border: 2px solid $grey-three;
