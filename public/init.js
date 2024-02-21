@@ -2,7 +2,12 @@ function insertAfter(newNode, existingNode) {
     existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
 }
 
-let header_right = function() {
+// this seems to happen sometimes so just scroll to the top;
+const reset_window_scroll = function(){
+    window.scrollTo(0, 0);
+}
+
+const header_right = function() {
     const node = document.createElement("div");
     node.setAttribute('class', 'd2l-navigation-header-right');
     node.setAttribute('slot', 'right');
@@ -11,7 +16,7 @@ let header_right = function() {
     _img.setAttribute('src', '/shared/public/UCT_logo.png');
     _img.setAttribute('alt', 'University of Cape Town');
     node.appendChild(_img);
-    
+
     let _div = document.getElementsByTagName('d2l-navigation-main-header');
     if (_div.length > 0) {
         _div[0].appendChild(node);
@@ -23,7 +28,7 @@ let init = function(file) {
 
     // Create new link Element
     let link = document.createElement('link');
- 
+
     // set the attributes for link element
     link.rel = 'stylesheet';
     link.type = 'text/css';
@@ -35,16 +40,17 @@ let init = function(file) {
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    
+
     // if guest login in URL
     if (urlParams.get('noRedirect') == 1) {
         // console.log(urlParams.get('noRedirect'));
 
-        setTimeout(function () { 
+        setTimeout(function () {
             const collection = document.getElementsByClassName("d2l-login-portal-flex");
             if (collection.length > 0) {
                 collection[0].classList.add("modal-login");
             }
+            reset_window_scroll();
         }, 500);
     }
 
@@ -59,7 +65,7 @@ let init = function(file) {
             }
         });
 
-        setTimeout(function () { 
+        setTimeout(function () {
             const login_btn_container = document.getElementsByClassName("d2l-login-portal-login-container");
             if (login_btn_container.length > 0) {
                 // console.log(login_btn_container);
@@ -82,6 +88,7 @@ let init = function(file) {
                     insertAfter(btn_cancel,  login_btn[0]);
                 }
             }
+            reset_window_scroll();
         }, 500); // we need to delay - javascript slow loading
     }
 }
