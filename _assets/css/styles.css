@@ -577,6 +577,7 @@ ol.large-number li {
   list-style: none;
   margin-bottom: 0.5rem;
   position: relative;
+  margin-right: unset !important;
 }
 ol.large-number li:before {
   content: counter(item) ". ";
