@@ -394,7 +394,6 @@ ul {
   padding-left: 1.25rem;
   margin-left: 0.625rem;
   list-style-position: outside;
-  overflow: hidden;
 }
 
 @media screen and (min-width: 768px) {
