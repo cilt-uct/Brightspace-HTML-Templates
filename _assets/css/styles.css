@@ -394,7 +394,6 @@ ul {
   padding-left: 1.25rem;
   margin-left: 0.625rem;
   list-style-position: outside;
-  overflow: hidden;
 }
 
 @media screen and (min-width: 768px) {
@@ -577,6 +576,7 @@ ol.large-number li {
   list-style: none;
   margin-bottom: 0.5rem;
   position: relative;
+  margin-right: unset !important;
 }
 ol.large-number li:before {
   content: counter(item) ". ";
