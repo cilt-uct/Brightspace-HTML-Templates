@@ -1148,10 +1148,10 @@ footer {
   padding: 30px 0;
   margin-top: 3.125rem;
   text-align: right;
-}
-
-footer img {
-  max-height: 125px;
+  
+  img {
+    max-height: 125px;
+  }
 }
 
 
@@ -1162,6 +1162,8 @@ footer.uct {
   height: 60px;
   /* border-radius: 12px; */
   margin: 3.125rem 1rem 0.5rem;
+  display: flex;
+  align-items: center;
 
   img {
     position: absolute;
@@ -1174,7 +1176,6 @@ footer.uct {
 
     &.right {
       height: 40px;
-      margin-top: 10px;
       right: 4%;
     }
   }
