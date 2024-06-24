@@ -1,0 +1,22 @@
+<p><script>
+    var SRC_CD_Iframe = "/shared/HTML-Template-Library/HTML-Templates-V3/widgets/js/crossDomainIframeResize.js"; 
+  </script>
+  <script type="text/javascript" src="/shared/HTML-Template-Library/HTML-Templates-V3/widgets/js/platformIntegration.js"></script>
+  <script> 
+  if (typeof (widget_timer_container) == "undefined"){
+     var widget_timer_container = window.setInterval(function(){Widget_container_Init()},100); 
+  
+  }
+  
+  function Widget_container_Init(){
+    if(typeof FrameManager == 'undefined' || typeof $ == 'undefined'){ 
+        return ; 
+    }else{  
+        clearInterval(widget_timer_container);  
+        FrameManager.createFrame("widget_container","/shared/HTML-Template-Library/HTML-Templates-V3/widgets/widget_body.html", "blockId=10&p=d2l"); 
+        FrameManager.init();
+    }
+  }
+  </script></p>
+  <div id="widget_container"></div>
+  <p></p>
