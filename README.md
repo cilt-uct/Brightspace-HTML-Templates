@@ -31,7 +31,7 @@ The deployment of this code can be found in Brightspace under `Shared Files` in 
 
 Upload the files to the appropriate folder inside `/shared/HTML-Template-Library/HTML-Templates-V3`.
 
-## Developement
+## Development
 
 Edit files in your favorite IDE, update the repository, and upload to Brightspace
 
