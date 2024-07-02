@@ -1,20 +1,17 @@
 <div id="assignment-container" class="container">
     <div class="piechartWrapper" style="text-align: center; display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(3, 1fr); grid-column-gap: 0px; grid-row-gap: 0px;"></div>
-</div>
-<p>
+    </div>
+    <p>
     <script src="https://s.brightspace.com/lib/jquery/3.7.1/jquery.min.js"></script>
-</p>
-<p>
-    <script>
+    </p>
+    <p><script>
         const ENTITYDROPBOXSTATUS_T = ['Unsubmitted', 'Submitted', 'Draft', 'Published'];
         const DROPBOXTYPE_T = ['None', 'Group', 'Individual'];
         const SUBMISSIONTYPE_T = ['File', 'Text', 'OnPaper', 'Observed'];
         const DROPBOX_COMPLETIONTYPE_T = ['OnSubmission', 'DueDate', 'ManuallyByLearner', 'OnEvaluation'];
-
-        let all_student = {};
-
+    
         $(document).ready(function() {
-
+    
             $.easyPieChart = function(el, options) {
                 var addScaleLine, animateLine, drawLine, easeInOutQuad, rAF, renderBackground, renderScale, renderTrack,
                 _this = this;
@@ -24,7 +21,7 @@
                 this.init = function() {
                     var percent, scaleBy;
                     _this.options = $.extend({}, $.easyPieChart.defaultOptions, options);
-
+    
                     percent = parseInt(_this.$el.data('percent'), 10);
                     _this.percentage = 0;
                     _this.canvas = $("<canvas width='" + _this.options.size + "' height='" + _this.options.size + "'></canvas>").get(0);
@@ -64,7 +61,7 @@
                         left: '50%',
                         transform: 'translate(-50%, calc(-50% + 11px))'
                     });
-
+    
                     _this.update(percent);
                     return _this;
                 };
@@ -203,12 +200,11 @@
                 }
                 });
             };
-
+    
             const org_unit_id = '{OrgUnitId}',
-                    user_role = '{RoleName}',
-                    org_unit_code = '{OrgUnitCode}';
+                  user_role = '{RoleName}';
             let assignments = [];
-
+    
             function arrayToCSVString(array) {
                 // Function to properly format each array item for CSV
                 function formatForCSV(value) {
@@ -216,68 +212,67 @@
                     if (value === undefined || value === null) {
                     return '';
                     }
-
+    
                     // If value contains a comma, enclose it in quotes
                     if (value.toString().includes(',')) {
                     return `"${value}"`;
                     }
-
+    
                     return value;
                 }
-
+    
                 // Use Array.prototype.map() to format each item for CSV
                 const csvArray = array.map(formatForCSV);
-
+    
                 // Join the formatted array with commas to create the CSV string
                 const csvString = csvArray.join(',');
-
+    
                 return csvString;
             }
-
+    
             // Function to fetch assignment submissions and construct CSV
             function exportAssignmentSubmissionsCSV(assignments) {
                 // Array to hold CSV rows
                 const csvRows = [];
-
+    
                 // Function to fetch submissions for an assignment
                 function fetchSubmissions(assignment, base) {
                     $.getJSON(`/d2l/api/le/1.67/${org_unit_id}/dropbox/folders/${assignment.Id}/submissions/`, function(submissions) {
                         // For each submission, fetch username and construct CSV row
                         submissions.forEach(function(submission) {
-
+                            console.log(submission);
                             if (submission.Entity.EntityType === 'User') {
-                                // was non-empty string
-                                if (all_student[submission.Entity.EntityId]) {
+                                fetchUsername(submission.Entity.EntityId, function(username) {
                                     // Construct CSV row with assignmentId, submissionId, and username
-                                    const csvRow = [all_student[submission.Entity.EntityId], submission.Entity.DisplayName,
-                                                new Date(assignment.DueDate).toLocaleDateString('en-ZA'),
-                                                new Date(submission.CompletionDate).toLocaleDateString('en-ZA'),
-                                                ENTITYDROPBOXSTATUS_T[submission.Status],
-                                                assignment.Name,
-                                                DROPBOXTYPE_T[assignment.DropboxType],
-                                                SUBMISSIONTYPE_T[assignment.SubmissionType],
+                                    const csvRow = [assignment.Name,
+                                                    DROPBOXTYPE_T[assignment.DropboxType],
+                                                    SUBMISSIONTYPE_T[assignment.SubmissionType],
+                                                    new Date(assignment.DueDate).toLocaleString(), //  changed
+                                                    username,
+                                                    new Date(submission.CompletionDate).toLocaleString(),, // to change
+                                                    ENTITYDROPBOXSTATUS_T[submission.Status]
                                                 ];
                                     // Push CSV row to csvRows array
                                     csvRows.push(arrayToCSVString(csvRow));
-                                }
+                                });
                             } else {
                                 // Construct CSV row with assignmentId, submissionId, and username
-                                const csvRow = [Submissions.SubmittedBy.DisplayName,
-                                                new Date(assignment.DueDate).toLocaleDateString('en-ZA'),
-                                                new Date(submission.CompletionDate).toLocaleDateString('en-ZA'),
-                                                ENTITYDROPBOXSTATUS_T[submission.Status],
-                                                assignment.Name,
-                                                DROPBOXTYPE_T[assignment.DropboxType],
-                                                SUBMISSIONTYPE_T[assignment.SubmissionType],
+                                const csvRow = [assignment.Name,
+                                                    DROPBOXTYPE_T[assignment.DropboxType],
+                                                    SUBMISSIONTYPE_T[assignment.SubmissionType],
+                                                    new Date(assignment.DueDate).toLocaleString(),// to change
+                                                    submission.Entity.DisplayName,
+                                                    new Date(submission.CompletionDate).toLocaleString(), // to change
+                                                    ENTITYDROPBOXSTATUS_T[submission.Status]
                                                 ];
                                 // Push CSV row to csvRows array
                                 csvRows.push(arrayToCSVString(csvRow));
                             }
-
+    
                         });
                     });
                 }
-
+    
                 // Function to fetch username for a user ID
                 function fetchUsername(userId, callback) {
                     $.getJSON('/d2l/api/lp/1.46/users/' + userId, function(user) {
@@ -286,37 +281,37 @@
                         callback(username);
                     });
                 }
-
+    
                 // Loop through assignment and fetch submissions for each assignment
                 $.each(assignments, function (i, assignment) {
                     fetchSubmissions(assignment);
                 });
-
+    
                 // Export CSV when all submissions have been fetched
                 $(document).ajaxStop(function() {
-
-                    const headers = '"Student Number","Student Name","Due Date","Submission Date","Submission Status","Assignment Name","Assignment Type","Assignment Submission Type"';
-
+    
+                    const headers = '"Assignment Name","Assignment Type","Assignment Submission Type","Due Date","Student Number","Submission Date","Submission Status"';
+    
                     // Join CSV rows with newline character to form CSV content
                     const csvContent = headers + '\n' + csvRows.join('\n');
-
+    
                     // Create a Blob containing the CSV data
                     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-
+    
                     // Create a download link for the Blob
                     const link = document.createElement('a');
                     link.href = window.URL.createObjectURL(blob);
-                    link.download = `${org_unit_code}_assignment_submissions.csv`;
-
+                    link.download = 'assignment_submissions.csv';
+    
                     // Append the link to the body and click it to trigger download
                     document.body.appendChild(link);
                     link.click();
-
+    
                     // Clean up by removing the link
                     document.body.removeChild(link);
                 });
             }
-
+    
             function drawPieChart() {
                 $('.piechart').easyPieChart({
                     scalecolor: "transparent",
@@ -326,7 +321,7 @@
                     size: 100,
                     rotate: 0,
                     animate: 1000,
-
+    
                     onStep: function(value) {
                         this.$el.find('span').text(Math.round(value) + '%');
                     },
@@ -335,125 +330,80 @@
                     }
                 });
             }
-
+    
             // Fetch data from the API using jQuery
             if (["Super Administrator","Administrator","Designer","Lecturer","Support Staff","Owner"].includes(user_role)) {
-
-                // Load Assignment details
-                function loadAssignmentDetails() {
-                    return new Promise((resolve, reject) => {
-                        $.ajax({
-                            url: `/d2l/api/le/1.67/${org_unit_id}/dropbox/folders/`,
-                            method: 'GET',
-                            dataType: 'json'
-                        })
-                        .done(function(data) {
-                            // Extract necessary data from the API response
-                            data.forEach(row => {
-                                let r = {
-                                    'Id': row.Id,
-                                    'Name': row.Name,
-                                    'TotalUsers': row.TotalUsers,
-                                    'TotalUsersWithSubmissions': row.TotalUsersWithSubmissions,
-                                    'TotalUsersWithFeedback': row.TotalUsersWithFeedback,
-                                    'StartDate': '',
-                                    'EndDate': '',
-                                    'DropboxType': row.DropboxType,
-                                    'SubmissionType': row.SubmissionType,
-                                    'DueDate': row.DueDate
-                                };
-                                if (row.Availability != null) {
-                                    r['StartDate'] = row.Availability.StartDate;
-                                    r['EndDate'] = row.Availability.EndDate;
-                                }
-                                assignments.push(r);
-                            });
-                            if (assignments.length > 0) {
-                                let total_users = assignments.reduce(function (accumulator, obj) {
-                                        return accumulator + (obj.DueDate != null? obj.TotalUsers : 0);
-                                    }, 0),
-                                    total_submitted = assignments.reduce(function (accumulator, obj) {
-                                        return accumulator + (obj.DueDate != null? obj.TotalUsersWithSubmissions : 0);
-                                    }, 0),
-                                    total_feedback = assignments.reduce(function (accumulator, obj) {
-                                        return accumulator + (obj.DueDate != null? obj.TotalUsersWithFeedback : 0);
-                                    }, 0);
-
-                                if (total_users > 0) {
-                                    total_submitted =  total_submitted / total_users * 100;
-                                    total_feedback =  total_feedback / total_users * 100;
-                                }
-                                // Append each pie chart within .piechartWrapper
-                                $('.piechartWrapper')
-                                    .append(`<div class="piechart" data-percent="${total_submitted}" `
-                                            + ` style='grid-area: 1 / 1 / 3 / 2;' `
-                                            + ` data-barcolor='#009CEF' data-trackcolor='#DDD'>`
-                                            + `<h4>Submitted</h4>`
-                                            + `<span>${total_submitted}</span>`
-                                            + `</div>`)
-                                    .append(`<div class="piechart" data-percent="${total_feedback}" `
-                                            + ` style='grid-area: 1 / 2 / 3 / 3;' `
-                                            + ` data-barcolor='#EF9C00' data-trackcolor='#DDD'>`
-                                            + `<h4>Feedback</h4>`
-                                            + `<span>${total_feedback}</span>`
-                                            + `</div>`)
-                                    .append(`<div id="btn_container" style='grid-area: 3 / 1 / 4 / 3;'></div>`);
-
-                                drawPieChart();
+                $.ajax({
+                    url: `/d2l/api/le/1.67/${org_unit_id}/dropbox/folders/`,
+                    method: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        // Extract necessary data from the API response
+                        console.log(data);
+                        data.forEach(row => {
+                            let r = {
+                                'Id': row.Id,
+                                'Name': row.Name,
+                                'TotalUsers': row.TotalUsers,
+                                'TotalUsersWithSubmissions': row.TotalUsersWithSubmissions,
+                                'TotalUsersWithFeedback': row.TotalUsersWithFeedback,
+                                'StartDate': '',
+                                'EndDate': '',
+                                'DueDate': row.DueDate
+                            };
+                            if (row.Availability != null) {
+                                r['StartDate'] = row.Availability.StartDate;
+                                r['EndDate'] = row.Availability.EndDate;
                             }
-
-                            resolve(data);
-                        })
-                        .fail(function(error) {
-                            console.error('Error fetching data:', error);
-                            reject(error);
+                            assignments.push(r);
                         });
-                    });
-                }
-
-                    // Fetch classlist recursively until all "next" URLs are completed
-                function getClassList(url) {
-                    // console.log(url);
-                    return new Promise((resolve, reject) => {
-                        $.getJSON(url, function(classList) {
-                            // console.log("Received classList:", classList);
-                            const page_student = {};
-
-                            // Iterate through the array and construct the object
-                            classList.Objects.forEach(user => {
-                                page_student[user.Identifier] = user.Username;
-                            });
-
-                            // console.log(page_student);
-                            all_student = { ...all_student, ...page_student};
-
-                            if (classList.Next){
-                                getClassList(classList.Next).then(nextData => {
-                                    resolve([classList].concat(nextData));
-                                }).catch(error => {
-                                    reject(error);
+                        console.log(assignments);
+                        if (assignments.length > 0) {
+                            let total_users = assignments.reduce(function (accumulator, obj) {
+                                    return accumulator + (obj.DueDate != null? obj.TotalUsers : 0);
+                                }, 0),
+                                total_submitted = assignments.reduce(function (accumulator, obj) {
+                                    return accumulator + (obj.DueDate != null? obj.TotalUsersWithSubmissions : 0);
+                                }, 0),
+                                total_feedback = assignments.reduce(function (accumulator, obj) {
+                                    return accumulator + (obj.DueDate != null? obj.TotalUsersWithFeedback : 0);
+                                }, 0);
+    
+                            if (total_users > 0) {
+                                total_submitted =  total_submitted / total_users * 100;
+                                total_feedback =  total_feedback / total_users * 100;
+                            }
+                            // Append each pie chart within .piechartWrapper
+                            $('.piechartWrapper')
+                                .append(`<div class="piechart" data-percent="${total_submitted}" `
+                                        + ` style='grid-area: 1 / 1 / 3 / 2;' `
+                                        + ` data-barcolor='#009CEF' data-trackcolor='#DDD'>`
+                                        + `<h4>Submitted</h4>`
+                                        + `<span>${total_submitted}</span>`
+                                        + `</div>`)
+                                .append(`<div class="piechart" data-percent="${total_feedback}" `
+                                        + ` style='grid-area: 1 / 2 / 3 / 3;' `
+                                        + ` data-barcolor='#EF9C00' data-trackcolor='#DDD'>`
+                                        + `<h4>Feedback</h4>`
+                                        + `<span>${total_feedback}</span>`
+                                        + `</div>`)
+                                .append(`<div id="btn_container" style='grid-area: 3 / 1 / 4 / 3;'></div>`);
+    
+                            // draw download button
+                            $('#btn_container').append('<button id="btn-assignment-download-csv" type="button" primary="" class="d2l-button">Download CSV</button>')
+                                .on('click','button#btn-assignment-download-csv', function(event) {
+                                    // add onclick for download
+                                    exportAssignmentSubmissionsCSV(assignments);
                                 });
-
-                            } else {
-                                resolve([classList]);
-                            }
-                        }).fail(function(error) {
-                            reject(error);
-                        });
-                    });
-                }
-
-                Promise.all([loadAssignmentDetails(), getClassList(`/d2l/api/le/1.67/${org_unit_id}/classlist/paged/`)]).then(() => {
-                    // draw download button
-                    $('#btn_container').append('<button id="btn-assignment-download-csv" type="button" primary="" class="d2l-button">Download CSV</button>')
-                        .on('click','button#btn-assignment-download-csv', function(event) {
-                            exportAssignmentSubmissionsCSV(assignments);
-                        });
-                }).catch(error => {
-                    console.error("An error occurred:", error);
+    
+                            drawPieChart();
+                        }
+    
+                    },
+                    error: function(jqxhr, textStatus, error) {
+                        console.error('Error fetching data:', textStatus, error);
+                    }
                 });
             }
-
         });
-    </script>
-</p>
+    </script></p> 
