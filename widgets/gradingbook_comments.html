@@ -1,0 +1,67 @@
+<div id="grading-container" class="container">
+ </div>
+  <p>
+  <script src="https://s.brightspace.com/lib/jquery/3.7.1/jquery.min.js"></script>
+  </p>
+  <p><script>
+    const org_unit_id = '{OrgUnitId}',
+          user_role = '{RoleName}',
+          org_unit_code = '{OrgUnitCode}';
+          
+    let all_grades = {};
+
+    // Function to fetch grades and feedback and construct CSV
+    function exportGradeFeedbackCSV(assignments) {
+      // Array to hold CSV rows
+      const csvRows = [];
+    }
+    // Function to fetch grade results and feedback for grade obj
+    function fetchGradeScores(grade_item_id, base) {
+      $.getJSON('https://ucttest.brightspace.com/d2l/api/le/1.74/42669/grades/', function(grades){
+         grades.forEach(function(grades){
+          const csvRow = [grades.UserName, grades.DisplayName, grades.GradeValue.GradeObjectName, grades.GradeValue.PointNumerator,GradeValue.Comments.Text];
+         
+          csvRows.push(arrayToCSVString(csvRow));
+         });
+      });
+    }
+
+    // Loop through grade items and fetch results for each student
+    $.each(gradeItems, function (i, grade_item) {
+      fetchGradeScores(grade_item);
+    });
+
+    // Export CSV when all grade items that have been fetched
+    $(document).ajaxStop(function () {
+
+      const headers = '"Student Number","Student Name","Grade Item","Grade","Feedback","Points Numerator","Points Denominator"';
+        // Join CSV rows with newline character to form CSV content
+        const csvContent = headers + '\n' + csvRows.join('\n');
+
+        // Create a Blob containing the CSV data
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+
+        // Create a download link for the Blob
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = `GradingFeedback.csv`;
+
+        // Append the link to the body and click it to trigger download
+        document.body.appendChild(link);
+        link.click();
+
+        // Clean up by removing the link
+        document.body.removeChild(link);
+
+        Promise.all([fetchGradeScores(`https://ucttest.brightspace.com/d2l/api/le/1.74/42669/grades/47619/values/`)]).then(() => {
+                        // draw download button
+                        $('#btn_container').append('<button id="btn-comments-download-csv" type="button" primary="" class="d2l-button">Grading CSV</button>')
+                            .on('click','button#btn-comments-download-csv', function(event) {
+                                CommntsGradingCSV(grades);
+                            });
+                    }).catch(error => {
+                        console.error("An error occurred:", error);
+                    });
+                });
+  </script>
+  </p>
