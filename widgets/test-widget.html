@@ -1,0 +1,30 @@
+<p>
+  <script>
+    var SRC_CD_Iframe = "/shared/HTML-Template-Library/HTML-Templates-V3/widgets/js/crossDomainIframeResize.js";
+  </script>
+  <script type="text/javascript"
+    src="/shared/HTML-Template-Library/HTML-Templates-V3/widgets/js/platformIntegration.js"></script>
+  <script>
+    if (typeof (widget_timer_container) == "undefined") {
+      var widget_timer_container = window.setInterval(Widget_container_Init, 100);
+
+    }
+
+    function Widget_container_Init() {
+      if (typeof FrameManager == 'undefined' || typeof $ == 'undefined') {
+        return;
+      } else {
+        clearInterval(widget_timer_container);
+        FrameManager.createFrame("widget_container", "https://srvubuclt004.uct.ac.za/d2l/api/course/providers/{OrgUnitId}", "html=true");
+        FrameManager.init();
+      }
+    }
+  </script>
+</p>
+<div id="widget_container"></div>
+<div>
+  <div>UserId: {UserId}</div>
+  <div>{OrgId} : {OrgName}</div>
+  <div>{OrgUnitId} : {OrgUnitName}</div>
+  <div></div>
+</div>

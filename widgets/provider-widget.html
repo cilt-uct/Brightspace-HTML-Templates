@@ -1,0 +1,27 @@
+<div id="course_providers" style="display: flex; flex-wrap: wrap; gap: 6px;"></div>
+<div id="course_providers_stats" style="color: #BBBBBB; text-align: center; padding-top: 1rem; font-size: 0.6rem;"></div>
+<p>
+    <script src="https://s.brightspace.com/lib/jquery/3.7.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            const url = window.location.host === 'amathuba.uct.ac.za' ? 'srvubuclt002' : 'srvubuclt004';
+            $.getJSON(`https://${url}.uct.ac.za/d2l/api/course/providers/{OrgUnitId}`, function( data ) {
+                const _div = $('#course_providers'),
+                    _stats = $('#course_providers_stats')
+                    total_courses = data['data'].reduce((c, {type}) => type !== 'program' ? c += 1:c, 0),
+                    total_programs = data['data'].reduce((c, {type}) => type === 'program' ? c += 1:c, 0);
+
+                _stats.html(`${total_courses > 0 ? total_courses+' Course(s)':''}${total_courses > 0 & total_programs > 0 ? ' and ':''}${total_programs > 0 ? total_programs+' Program(s)':''}`);
+                $.each(data['data'], function(i, row){
+                    let el = $(`<div class="d2l-body-small">${row['provider']},${row['term']}</div>`);
+                    el.css('border-radius', '999em')
+                      .css('border', `1px solid ${row['type'] == 'program'? '#172732': '#133248'}`)
+                      .css('background-color', `${row['type'] == 'program'? '#E3E9F1': '#CDD5DC'}`)
+                      .css('padding', '0.2rem 0.4rem')
+                      .css('font-size', '0.6rem');
+                    _div.append(el);
+                });
+            });
+        });
+    </script>
+</p>
