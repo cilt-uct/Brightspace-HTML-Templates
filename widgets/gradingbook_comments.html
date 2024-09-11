@@ -22,19 +22,35 @@
         const headers = ["Student Number", "Student Name", "Grade Name", "Points Numerator", "Points Denominator", "Feedback"];
         csvRows.push(headers);
 
+      // Helper function to strip HTML tags from a string
+      function stripHTML(html) {
+        if (!html) return "";  // Handle empty HTML
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = html;
+        return tempDiv.textContent || tempDiv.innerText || html.replace(/<\/?[^>]+(>|$)/g, "");   // Extract plain text
+    }
+
         // Loop through all_grades object and construct CSV rows
         for (const key in all_grades) {
             const row = all_grades[key];
 
             $.each(row.GradeValue, function(i, grade){
+
+                const feedback = grade.Comments
+                ? (grade.Comments.Text || stripHTML(grade.Comments.Html))
+                : "No feedback";
+
+                console.log("Comments Html feedback:",feedback);
+
                 csvRows.push([
                     row.UserName,
                     row.DisplayName,
                     grade.GradeObjectName,
                     grade.PointsNumerator,
                     grade.PointsDenominator,
-                    grade.Comments.Text
+                    feedback
                 ]);
+           
             });
         }
         const csvContent = arrayToCSVString(csvRows);
@@ -70,8 +86,9 @@
                             GradeObjectName: grade.GradeValue.GradeObjectName,
                             PointsNumerator: grade.GradeValue.PointsNumerator,
                             PointsDenominator: grade.GradeValue.PointsDenominator,
-                            Comments: { Text: grade.GradeValue.Comments.Text }
+                            Comments: { Text: grade.GradeValue.Comments.Html }
                         };
+                        console.log("the comment object", grade.GradeValue.Comments.Html);
                     }
 
                     // Add each grade object add line for student to all_grades object
