@@ -1,0 +1,162 @@
+<p></p>
+<div id="grading-container" class="container"></div>
+<p>
+<script src="https://s.brightspace.com/lib/jquery/3.7.1/jquery.min.js"></script>
+</p>
+<p><script>
+    const org_unit_id = '{OrgUnitId}',
+          user_role = '{RoleName}',
+          org_unit_code = '{OrgUnitCode}';
+
+    let all_grades = {};
+    let gradeItems = [];
+
+    // Function to convert array to CSV string
+    function arrayToCSVString(array) {
+        return array.map(row => row.map(value => `"${value}"`).join(",")).join("\n");
+    }
+
+    // Function to fetch grades and construct CSV
+    function exportGradeFeedbackCSV() {
+        const csvRows = [];
+        const headers = ["Student Number", "Student Name", "Grade Name", "Points Numerator", "Points Denominator", "Feedback"];
+        csvRows.push(headers);
+
+      // Helper function to strip HTML tags from a string
+      function stripHTML(html) {
+        if (!html) return "";  // Handle empty HTML
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = html;
+        return tempDiv.textContent || tempDiv.innerText || html.replace(/<\/?[^>]+(>|$)/g, "");   // Extract plain text
+    }
+
+        // Loop through all_grades object and construct CSV rows
+        for (const key in all_grades) {
+            const row = all_grades[key];
+
+            $.each(row.GradeValue, function(i, grade){
+
+                const feedback = grade.Comments
+                ? (grade.Comments.Text || stripHTML(grade.Comments.Html))
+                : "No feedback";
+
+                console.log("Comments Html feedback:",feedback);
+
+                csvRows.push([
+                    row.UserName,
+                    row.DisplayName,
+                    grade.GradeObjectName,
+                    grade.PointsNumerator,
+                    grade.PointsDenominator,
+                    feedback
+                ]);
+           
+            });
+        }
+        const csvContent = arrayToCSVString(csvRows);
+
+        // Create Blob and trigger download
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = `${org_unit_code}_GradingFeedback.csv`;
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    // Function to fetch grade scores for each grade item
+    function fetchGradeScores(grade_item_id) {
+        // console.log(`fetchGradeScores: ${grade_item_id}`);
+
+        var deferred = $.Deferred();
+
+        $.getJSON(`/d2l/api/le/1.74/${org_unit_id}/grades/${grade_item_id}/values/`)
+            .done(function(grades) {
+                grades.Objects.forEach(function(grade){
+                    // console.log(grade);
+                    let _tmp_gv = {
+                        GradeObjectName: '',
+                        PointNumerator: 0,
+                        Comments: ''
+                    }
+                    if (grade.GradeValue) {
+                        _tmp_gv = {
+                            GradeObjectName: grade.GradeValue.GradeObjectName,
+                            PointsNumerator: grade.GradeValue.PointsNumerator,
+                            PointsDenominator: grade.GradeValue.PointsDenominator,
+                            Comments: { Text: grade.GradeValue.Comments.Html }
+                        };
+                        console.log("the comment object", grade.GradeValue.Comments.Html);
+                    }
+
+                    // Add each grade object add line for student to all_grades object
+                    if (all_grades[grade.User.Identifier]) {
+                        all_grades[grade.User.Identifier].GradeValue.push(_tmp_gv);
+                    } else {
+                        // new entry
+                        all_grades[grade.User.Identifier] = {
+                            UserName: grade.User.UserName,
+                            DisplayName: grade.User.DisplayName,
+                            GradeValue: [ _tmp_gv ]
+                        };
+                    }
+                });
+                // Resolve the promise with the data if the request succeeds
+                deferred.resolve(grades);
+            })
+            .fail(function(jqXHR, textStatus) {
+                if (textStatus === 'timeout' || jqXHR.status === 400) {
+                    // If timeout or bad request, resolve the promise anyway (ignore errors)
+                    console.log('Request timed out or returned bad request. Ignoring.');
+                    deferred.resolve();
+                } else {
+                    // For other errors, reject the promise
+                    deferred.reject(jqXHR);
+                }
+            });
+
+        return deferred.promise();
+    }
+
+    // Function to fetch grade items from the API
+    function fetchGradeItems() {
+        var deferred = $.Deferred();
+
+        return $.getJSON(`/d2l/api/le/1.74/${org_unit_id}/grades/`, function(data) {
+            // Extract grade item IDs from the response and store them in the gradeItems array
+            data.forEach(function(item) {
+                gradeItems.push(item.Id);
+            });
+        });
+    }
+
+    // Fetch grade items first, then fetch grades for each item
+    fetchGradeItems().then(() => {
+        // Once grade items are fetched, retrieve grades for each item
+        Promise.all(gradeItems.map(fetchGradeScores)).then(() => {
+            // Create and display download button after grades are fetched
+            $('#grading-container').append('<button id="btn-comments-download-csv" type="button"primary="" align="center" class="d2l-button">Download Grading CSV</button>');
+
+            // Filter out the empty grade book items by name
+            $.each(all_grades, function(i, el) {
+                el.GradeValue = el.GradeValue.filter(function(item) {
+                    return item.GradeObjectName !== "";
+                });
+            });
+
+            // console.log("Populated all_grades: ", all_grades);
+
+            // Attach click event to download CSV
+            $('#grading-container').on('click', '#btn-comments-download-csv', function() {
+                exportGradeFeedbackCSV();
+            });
+        }).catch(error => {
+            console.error("An error occurred while fetching grades:", error);
+        });
+    }).catch(error => {
+        console.error("An error occurred while fetching grade items:", error);
+    });
+
+</script></p>
