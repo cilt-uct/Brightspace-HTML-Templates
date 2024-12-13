@@ -2,32 +2,41 @@
 
 ## Deployment
 
-The deployment of this code can be found in Brightspace under `Shared Files` in `/shared/HTML-Template-Library/HTML-Templates-V4`.
+The deployment of this code can be found in Brightspace under `Shared Files` (https://[your_domain]/d2l/lp/manageFiles/main.d2l?g=1&ou=6606)
 
 <ul>
-    <li>_assets
+    <li>HTML-Template-Library
         <ul>
-            <li>css (The scss that compiles to min.css and css)</li>
-            <li>img (All the shared images in templates etc.)</li>
-            <li>js (script.js + min.js)</li>
-            <li>thirdpartylib
+            <li>[ other versions ]</li>
+            <li>HTML-Templates-X
                 <ul>
-                    <li>animate-css</li>
-                    <li>bootstrap-4.3.1</li>
-                    <li>fontawesome-free-5.9.0-web</li>
-                    <li>jquery</li>
-                    <li>popper-js</li>
-                    <li>wheelnavjs</li>
+                    <li>_assets
+                        <ul>
+                            <li>css (The scss that compiles to min.css and css)</li>
+                            <li>img (All the shared images in templates etc.)</li>
+                            <li>js (script.js + min.js)</li>
+                        </ul>
+                    </li>
+                    <li>pages (Templates available in Content Editor)</li>
                 </ul>
             </li>
         </ul>
     </li>
-    <li>pages (Templates available in Content Editor)</li>
+    <li>thirdpartylib
+        <ul>
+            <li>animate-css</li>
+            <li>bootstrap-[version]</li>
+            <li>fontawesome-[version]</li>
+            <li>jquery</li>
+            <li>popper-js</li>
+            <li>wheelnavjs</li>
+        </ul>
+    </li>
 </ul>
 
 ### To Deploy
 
-Upload the files to the appropriate folder inside `/shared/HTML-Template-Library/HTML-Templates-V4`.
+Upload the files to the appropriate folder inside `/shared/`.
 
 ## Development
 
