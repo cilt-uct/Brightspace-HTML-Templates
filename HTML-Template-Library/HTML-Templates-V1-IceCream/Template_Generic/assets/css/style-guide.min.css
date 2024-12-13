@@ -1,0 +1,177 @@
+/*** Elements (Temporary) ***/
+/* - file not necessary for course development */
+h2.theme-title {
+  background: #F2F8FC;
+  border: 1px solid #99C5E5;
+  color: #1C5295;
+  font-weight: 500;
+  padding: 15px;
+}
+
+h3.theme-subtitle {
+  color: #1C5295;
+  font-weight: 600;
+}
+
+.descriptive-banner {
+  background-color: #BDEDF5;
+  color: #565A5C;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top: #00BDDD 1px solid;
+  border-bottom: #00BDDD 1px solid;
+  margin-bottom: 40px;
+  margin-top: 20px;
+}
+
+/* Color Palette */
+.tmp-palette {
+  list-style: none;
+  padding-left: 0;
+}
+
+.tmp-palette li {
+  margin-bottom: 20px;
+}
+
+.tmp-palette span {
+  border: 1px solid transparent;
+  border-radius: 6px 6px 0 0;
+  display: inline-block;
+  max-width: 150px;
+  height: 50px;
+  width: 90%;
+}
+
+.tmp-palette .color-prim-one {
+  background-color: #006FBF;
+}
+
+.tmp-palette .color-prim-two {
+  background-color: #E57231;
+}
+
+.tmp-palette .color-sec-one {
+  background-color: #46A661;
+}
+
+.tmp-palette .color-sec-two {
+  background-color: #FFBA59;
+}
+
+.tmp-palette .color-sec-three {
+  background-color: #CD2026;
+}
+
+.tmp-palette .color-sec-four {
+  background-color: #00BDDD;
+}
+
+.tmp-palette .color-sec-five {
+  background-color: #00a4c0;
+}
+
+.tmp-palette .color-sec-six {
+  background-color: #1C5295;
+}
+
+.tmp-palette .color-sec-seven {
+  background-color: #9C161B;
+}
+
+.tmp-palette .color-tint-one {
+  background-color: #F2F8FC;
+  border-color: #99C5E5;
+}
+
+.tmp-palette .color-tint-two {
+  background-color: #99C5E5;
+  border-color: #99C5E5;
+}
+
+.tmp-palette .color-tint-three {
+  background-color: #ECF6EE;
+  border-color: #65B57B;
+}
+
+.tmp-palette .color-tint-four {
+  background-color: #65B57B;
+  border-color: #65B57B;
+}
+
+.tmp-palette .color-tint-five {
+  background-color: #DBF5FA;
+  border-color: #BDEDF5;
+}
+
+.tmp-palette .color-tint-six {
+  background-color: #BDEDF5;
+  border-color: #BDEDF5;
+}
+
+.tmp-palette .color-white {
+  background-color: #FFFFFF;
+  border-color: #E6EAF0;
+}
+
+.tmp-palette .color-grey-one {
+  background-color: #FFFFFF;
+  border-color: #E6EAF0;
+}
+
+.tmp-palette .color-grey-two {
+  background-color: #F9FAFB;
+  border-color: #E6EAF0;
+}
+
+.tmp-palette .color-grey-three {
+  background-color: #F2F3F5;
+}
+
+.tmp-palette .color-grey-four {
+  background-color: #E6EAF0;
+}
+
+.tmp-palette .color-grey-five {
+  background-color: #D3D9E3;
+}
+
+.tmp-palette .color-grey-six {
+  background-color: #B9C2D0;
+}
+
+.tmp-palette .color-grey-seven {
+  background-color: #7C8695;
+}
+
+.tmp-palette .color-grey-eight {
+  background-color: #72777A;
+}
+
+.tmp-palette .color-grey-nine {
+  background-color: #565A5C;
+}
+
+.tmp-palette .color-gradient-one {
+  background: -webkit-linear-gradient(#FFFFFF, #F9FAFB);
+  background: linear-gradient(#FFFFFF, #F9FAFB);
+  border-color: #E6EAF0;
+}
+
+.tmp-palette .color-gradient-two {
+  background: -webkit-linear-gradient(#F9FAFB, #F2F3F5);
+  background: linear-gradient(#F9FAFB, #F2F3F5);
+  border-color: #E6EAF0;
+}
+
+.tmp-palette .color-gradient-three {
+  background: -webkit-linear-gradient(#F9FAFB, #E6EAF0);
+  background: linear-gradient(#F9FAFB, #E6EAF0);
+  border-color: #E6EAF0;
+}
+
+.tmp-palette .color-gradient-four {
+  background: -webkit-linear-gradient(#B9C2D0, #72777A);
+  background: linear-gradient(#B9C2D0, #72777A);
+  border-color: #E6EAF0;
+}

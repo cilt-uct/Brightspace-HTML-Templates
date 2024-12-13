@@ -1,0 +1,40 @@
+0:04
+Develop comfort navigating the common elements of D2L Learning Environment.
+0:09
+This tutorial shows how to navigate D2L Learning Environment.
+0:14
+The toolbar at the top of the page is the minibar.
+0:17
+The minibar is always present and allows you to navigate within D2L Learning Environment.
+0:23
+Click My Home at any time to return to your organization's homepage.
+0:28
+Next on the minibar is the course selector. User the course selector to access your courses.
+0:37
+There are three alert icons on the minibar. The Messages alert notifies you about unread
+0:42
+mail and pager messages. The Updates alert notifies you about new and
+0:46
+updated news items, upcoming due dates and end dates, and new and updated grades.
+0:52
+The Subscriptions alert notifies you about new blog posts and new discussion posts in
+0:57
+forums, topics and threads you have subscribed to.
+1:01
+Click your name to open your personal menu.
+1:05
+Your personal menu lets you edit user-specific settings, including your profile, notifications,
+1:11
+and account settings. You can also view your progress and log out of D2L Learning Environment
+1:16
+from your personal menu.
+1:19
+The navbar provides links to course-specific tools. The style, layout, and available links
+1:25
+in the navbar may change depending on your course.
+1:29
+The Course Homepage may also change from course to course. However, it generally provides
+1:34
+quick access to important information, such as News and Calendar items.
+1:39
+Develop comfort navigating the common elements of D2L Learning Environment.
