@@ -355,11 +355,11 @@ $theme-color-interval: 9 !default;
         .row {
             .col-sm-10 {
                 //-ms-flex: 0 0 89.333333%;
-                flex: 0 0 89.333333%;
-                max-width: 89.333333%;
+                flex: 0 0 95.333333%;
+                max-width: 95.333333%;
 
                 &.offset-sm-1 {
-                    margin-left: 5.333333%;
+                    margin-left: 2.333333%;
                 }
             }
         }
@@ -563,7 +563,24 @@ $img_size: 100px;
 
 .alert-info {
 
-    div:first-child > span > img, .lightbulb img {
+    div:first-child {
+        span.lightbulb {
+            display: block;
+            padding: 6px;
+            text-align: center;
+
+            img:first-child {
+                width: 30px;
+                margin-right: 0px;
+                position: relative;
+                top: -14px;
+                left: -5px;
+                filter: brightness(0) saturate(100%) invert(23%) sepia(64%) saturate(612%) hue-rotate(140deg) brightness(98%) contrast(92%);
+            }
+        }
+    }
+
+    div:first-child > span > img {
         width: 40px;
         position: relative;
         display: block;
@@ -698,4 +715,17 @@ blockquote {
         background-color: white; /* White background on hover */
         color: black; /* Black text on hover */
     }
+}
+
+/* Special case where Paragraph is at thte top we add some spacing there.
+
+/* Case 1: <p> is directly the first child of the parent div */
+.container-fluid .row:first-child .col-sm-10.offset-sm-1 > p:first-child {
+    margin-top: 1.875rem;
+}
+
+/* Case 2: <p> is the first child of a nested div,
+and that div is the first child of the parent div */
+.container-fluid .row:first-child .col-sm-10.offset-sm-1 > div:first-child > p:first-child {
+    margin-top: 1.875rem;
 }

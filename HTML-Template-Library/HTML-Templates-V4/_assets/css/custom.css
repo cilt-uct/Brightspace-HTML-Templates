@@ -253,11 +253,11 @@
 
 @media (min-width: 576px) {
   .container-fluid .row .col-sm-10 {
-    flex: 0 0 89.333333%;
-    max-width: 89.333333%;
+    flex: 0 0 95.333333%;
+    max-width: 95.333333%;
   }
   .container-fluid .row .col-sm-10.offset-sm-1 {
-    margin-left: 5.333333%;
+    margin-left: 2.333333%;
   }
 }
 h1, h2, h3, h4, h5, h6 {
@@ -423,7 +423,20 @@ table.table-bordered th, table.table-bordered td {
   top: -4px;
 }
 
-.alert-info div:first-child > span > img, .alert-info .lightbulb img {
+.alert-info div:first-child span.lightbulb {
+  display: block;
+  padding: 6px;
+  text-align: center;
+}
+.alert-info div:first-child span.lightbulb img:first-child {
+  width: 30px;
+  margin-right: 0px;
+  position: relative;
+  top: -14px;
+  left: -5px;
+  filter: brightness(0) saturate(100%) invert(23%) sepia(64%) saturate(612%) hue-rotate(140deg) brightness(98%) contrast(92%);
+}
+.alert-info div:first-child > span > img {
   width: 40px;
   position: relative;
   display: block;
@@ -621,4 +634,17 @@ blockquote {
 .custom-button:hover {
   background-color: white; /* White background on hover */
   color: black; /* Black text on hover */
+}
+
+/* Special case where Paragraph is at thte top we add some spacing there.
+
+/* Case 1: <p> is directly the first child of the parent div */
+.container-fluid .row:first-child .col-sm-10.offset-sm-1 > p:first-child {
+  margin-top: 1.875rem;
+}
+
+/* Case 2: <p> is the first child of a nested div,
+and that div is the first child of the parent div */
+.container-fluid .row:first-child .col-sm-10.offset-sm-1 > div:first-child > p:first-child {
+  margin-top: 1.875rem;
 }/*# sourceMappingURL=custom.css.map */
