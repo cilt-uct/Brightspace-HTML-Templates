@@ -246,8 +246,7 @@
       
                                   if (submission.Entity.EntityType === 'User') {
                                       if (all_student[submission.Entity.EntityId]) {
-                                          // was non-empty string
-      
+                                          
                                           // Construct CSV row with assignmentId, submissionId, and username
                                           const csvRow = [all_student[submission.Entity.EntityId], submission.Entity.DisplayName,
                                                       new Date(assignment.DueDate).toLocaleDateString('en-ZA'),
@@ -257,12 +256,22 @@
                                                       DROPBOXTYPE_T[assignment.DropboxType],
                                                       SUBMISSIONTYPE_T[assignment.SubmissionType],
                                                       ];
+                                                      
                                           // Push CSV row to csvRows array
                                           csvRows.push(arrayToCSVString(csvRow));
                                       }
                                   } else {
-                                      // Construct CSV row with assignmentId, submissionId, and username
-                                      const csvRow = [Submissions.SubmittedBy.DisplayName,
+                                    // Construct CSV row with assignmentId, submissionId, and username   
+                                    let submittedBy = "";
+                                    if (submission.Submissions && submission.Submissions.length > 0) {
+                                        let firstSubmission = submission.Submissions[0];
+                                        submittedBy = firstSubmission.SubmittedBy.DisplayName;
+                                    } else {
+                                        console.log("No submissions found");
+                                    }
+                                    console.log(submission.Submissions[0].SubmittedBy.DisplayName);
+
+                                      const csvRow = [submittedBy,
                                                       new Date(assignment.DueDate).toLocaleDateString('en-ZA'),
                                                       new Date(submission.CompletionDate).toLocaleDateString('en-ZA'),
                                                       ENTITYDROPBOXSTATUS_T[submission.Status],
