@@ -9,11 +9,11 @@
               const DROPBOXTYPE_T = ['None', 'Group', 'Individual'];
               const SUBMISSIONTYPE_T = ['File', 'Text', 'OnPaper', 'Observed'];
               const DROPBOX_COMPLETIONTYPE_T = ['OnSubmission', 'DueDate', 'ManuallyByLearner', 'OnEvaluation'];
-      
+
               let all_student = {};
-      
+
               $(document).ready(function() {
-      
+
                   $.easyPieChart = function(el, options) {
                       var addScaleLine, animateLine, drawLine, easeInOutQuad, rAF, renderBackground, renderScale, renderTrack,
                       _this = this;
@@ -23,7 +23,7 @@
                       this.init = function() {
                           var percent, scaleBy;
                           _this.options = $.extend({}, $.easyPieChart.defaultOptions, options);
-      
+
                           percent = parseInt(_this.$el.data('percent'), 10);
                           _this.percentage = 0;
                           _this.canvas = $("<canvas width='" + _this.options.size + "' height='" + _this.options.size + "'></canvas>").get(0);
@@ -63,7 +63,7 @@
                               left: '50%',
                               transform: 'translate(-50%, calc(-50% + 11px))'
                           });
-      
+
                           _this.update(percent);
                           return _this;
                       };
@@ -202,12 +202,12 @@
                       }
                       });
                   };
-      
+
                   const org_unit_id = '{OrgUnitId}',
                         user_role = '{RoleName}',
                         org_unit_code = '{OrgUnitCode}';
                   let assignments = [];
-      
+
                   function arrayToCSVString(array) {
                       // Function to properly format each array item for CSV
                       function formatForCSV(value) {
@@ -215,39 +215,38 @@
                           if (value === undefined || value === null) {
                           return '';
                           }
-      
+
                           // If value contains a comma, enclose it in quotes
                           if (value.toString().includes(',')) {
                           return `"${value}"`;
                           }
-      
+
                           return value;
                       }
-      
+
                       // Use Array.prototype.map() to format each item for CSV
                       const csvArray = array.map(formatForCSV);
-      
+
                       // Join the formatted array with commas to create the CSV string
                       const csvString = csvArray.join(',');
-      
+
                       return csvString;
                   }
-      
+
                   // Function to fetch assignment submissions and construct CSV
                   function exportAssignmentSubmissionsCSV(assignments) {
                       // Array to hold CSV rows
                       const csvRows = [];
-      
+
                       // Function to fetch submissions for an assignment
                       function fetchSubmissions(assignment, base) {
                           $.getJSON(`/d2l/api/le/1.67/${org_unit_id}/dropbox/folders/${assignment.Id}/submissions/`, function(submissions) {
                               // For each submission, fetch username and construct CSV row
                               submissions.forEach(function(submission) {
-      
+
                                   if (submission.Entity.EntityType === 'User') {
                                       if (all_student[submission.Entity.EntityId]) {
-                                          // was non-empty string
-      
+
                                           // Construct CSV row with assignmentId, submissionId, and username
                                           const csvRow = [all_student[submission.Entity.EntityId], submission.Entity.DisplayName,
                                                       new Date(assignment.DueDate).toLocaleDateString('en-ZA'),
@@ -257,12 +256,19 @@
                                                       DROPBOXTYPE_T[assignment.DropboxType],
                                                       SUBMISSIONTYPE_T[assignment.SubmissionType],
                                                       ];
+
                                           // Push CSV row to csvRows array
                                           csvRows.push(arrayToCSVString(csvRow));
                                       }
                                   } else {
-                                      // Construct CSV row with assignmentId, submissionId, and username
-                                      const csvRow = [Submissions.SubmittedBy.DisplayName,
+                                    // Construct CSV row with assignmentId, submissionId, and username
+                                    let submittedBy = "";
+                                    if (submission.Submissions && submission.Submissions.length > 0) {
+                                        let firstSubmission = submission.Submissions[0];
+                                        submittedBy = firstSubmission.SubmittedBy.DisplayName;
+                                    }
+                                    // console.log(submittedBy);
+                                    const csvRow = [submittedBy,
                                                       new Date(assignment.DueDate).toLocaleDateString('en-ZA'),
                                                       new Date(submission.CompletionDate).toLocaleDateString('en-ZA'),
                                                       ENTITYDROPBOXSTATUS_T[submission.Status],
@@ -270,14 +276,14 @@
                                                       DROPBOXTYPE_T[assignment.DropboxType],
                                                       SUBMISSIONTYPE_T[assignment.SubmissionType],
                                                       ];
-                                      // Push CSV row to csvRows array
-                                      csvRows.push(arrayToCSVString(csvRow));
+                                    // Push CSV row to csvRows array
+                                    csvRows.push(arrayToCSVString(csvRow));
                                   }
-      
+
                               });
                           });
                       }
-      
+
                       // Function to fetch username for a user ID
                       function fetchUsername(userId, callback) {
                           $.getJSON('/d2l/api/lp/1.46/users/' + userId, function(user) {
@@ -286,37 +292,37 @@
                               callback(username);
                           });
                       }
-      
+
                       // Loop through assignment and fetch submissions for each assignment
                       $.each(assignments, function (i, assignment) {
                           fetchSubmissions(assignment);
                       });
-      
+
                       // Export CSV when all submissions have been fetched
                       $(document).ajaxStop(function() {
-      
+
                           const headers = '"Student Number","Student Name","Due Date","Submission Date","Submission Status","Assignment Name","Assignment Type","Assignment Submission Type"';
-      
+
                           // Join CSV rows with newline character to form CSV content
                           const csvContent = headers + '\n' + csvRows.join('\n');
-      
+
                           // Create a Blob containing the CSV data
                           const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-      
+
                           // Create a download link for the Blob
                           const link = document.createElement('a');
                           link.href = window.URL.createObjectURL(blob);
                           link.download = `${org_unit_code}_assignment_submissions.csv`;
-      
+
                           // Append the link to the body and click it to trigger download
                           document.body.appendChild(link);
                           link.click();
-      
+
                           // Clean up by removing the link
                           document.body.removeChild(link);
                       });
                   }
-      
+
                   function drawPieChart() {
                       $('.piechart').easyPieChart({
                           scalecolor: "transparent",
@@ -326,7 +332,7 @@
                           size: 100,
                           rotate: 0,
                           animate: 1000,
-      
+
                           onStep: function(value) {
                               this.$el.find('span').text(Math.round(value) + '%');
                           },
@@ -335,10 +341,10 @@
                           }
                       });
                   }
-      
+
                   // Fetch data from the API using jQuery
                   if (["Super Administrator","Administrator","Designer","Lecturer","Support Staff","Owner"].includes(user_role)) {
-      
+
                       // Load Assignment details
                       function loadAssignmentDetails() {
                           return new Promise((resolve, reject) => {
@@ -379,9 +385,9 @@
                                           total_feedback = assignments.reduce(function (accumulator, obj) {
                                               return accumulator + (obj.DueDate != null? obj.TotalUsersWithFeedback : 0);
                                           }, 0);
-      
+
                                       if (total_users > 0) {
-                                          console.log(assignments);
+                                          //console.log(assignments);
                                           //console.log(assignments.length);
                                           total_submissions = total_submitted;
                                           total_assignements = assignments.length;
@@ -411,10 +417,10 @@
                                                   + `<p>No. of Assignments: &nbsp;</span>${total_assignements}</span></p>`
                                                   + `</div>`)
                                           .append(`<div id="btn_container" style='grid-area: 4 / 1 / 4 / 3;'></div>`);
-      
+
                                       drawPieChart();
                                   }
-      
+
                                   resolve(data);
                               })
                               .fail(function(error) {
@@ -423,7 +429,7 @@
                               });
                           });
                       }
-      
+
                        // Fetch classlist recursively until all "next" URLs are completed
                       function getClassList(url) {
                           // console.log(url);
@@ -431,22 +437,22 @@
                               $.getJSON(url, function(classList) {
                                   // console.log("Received classList:", classList);
                                   const page_student = {};
-      
+
                                   // Iterate through the array and construct the object
                                   classList.Objects.forEach(user => {
                                       page_student[user.Identifier] = user.Username;
                                   });
-      
+
                                   // console.log(page_student);
                                   all_student = { ...all_student, ...page_student};
-      
+
                                   if (classList.Next){
                                       getClassList(classList.Next).then(nextData => {
                                           resolve([classList].concat(nextData));
                                       }).catch(error => {
                                           reject(error);
                                       });
-      
+
                                   } else {
                                       resolve([classList]);
                                   }
@@ -455,7 +461,7 @@
                               });
                           });
                       }
-      
+
                       Promise.all([loadAssignmentDetails(), getClassList(`/d2l/api/le/1.67/${org_unit_id}/classlist/paged/`)]).then(() => {
                           // draw download button
                           $('#btn_container').append('<button id="btn-assignment-download-csv" type="button" primary="" class="d2l-button">Download CSV</button>')
@@ -466,6 +472,6 @@
                           console.error("An error occurred:", error);
                       });
                   }
-      
+
               });
           </script></p>
