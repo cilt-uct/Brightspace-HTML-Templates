@@ -1,0 +1,130 @@
+<p>
+<script src="https://s.brightspace.com/lib/jquery/3.7.1/jquery.min.js"></script>
+<script>
+const org_unit_id = '{OrgUnitId}',
+      user_role = '{RoleName}',
+      org_unit_code = '{OrgUnitCode}';
+
+$(document).ready(function() {
+
+    // Only run for privileged roles
+    if (["Super Administrator","Administrator","Designer","Lecturer","Support Staff","Owner"].includes(user_role)) {
+
+        /**
+         * Wait until the banner element exists and has non-zero size
+         */
+        function waitForBannerReady(selector, timeout = 5000) {
+            return new Promise((resolve, reject) => {
+                const interval = 50;
+                let elapsed = 0;
+                const check = () => {
+                    const el = document.querySelector(selector);
+                    if (el) {
+                        const rect = el.getBoundingClientRect();
+                        if (rect.width > 0 && rect.height > 0) {
+                            resolve(el);
+                            return;
+                        }
+                    }
+                    if ((elapsed += interval) >= timeout) reject(`Banner not ready: ${selector}`);
+                    else setTimeout(check, interval);
+                };
+                check();
+            });
+        }
+
+        /**
+         * Fetch course details and overlay inactive banner
+         */
+        async function fetchCourseAndOverlay() {
+            try {
+                const response = await fetch(`/d2l/api/lp/1.51/courses/${org_unit_id}`, {
+                    headers: { 'Accept': 'application/json' }
+                });
+                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                const course = await response.json();
+                // console.log('Course info:', course);
+
+                if (!course.IsActive) {
+                    const banner = await waitForBannerReady('.d2l-image-banner-overlay');
+                    // Use requestAnimationFrame to ensure layout is finalized
+                    requestAnimationFrame(() => overlayInactiveBanner(banner));
+                }
+
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        /**
+         * Overlay the bottom-right quarter with d2l-alert and button
+         */
+        function overlayInactiveBanner(shadowHost) {
+            const rect = shadowHost.getBoundingClientRect();
+
+            // Overlay covers bottom-right quarter
+            const overlay = document.createElement('div');
+            overlay.style.position = 'absolute';
+            overlay.style.width = `${rect.width / 2}px`;
+            overlay.style.height = `${rect.height / 2}px`;
+            overlay.style.top = `${rect.top + window.scrollY + rect.height / 2}px`;
+            overlay.style.left = `${rect.left + window.scrollX + rect.width / 2}px`;
+            overlay.style.pointerEvents = 'auto';
+            overlay.style.zIndex = '99999';
+            overlay.style.display = 'flex';
+            overlay.style.alignItems = 'flex-end';
+            overlay.style.justifyContent = 'flex-end';
+            overlay.style.transform = 'scale(0.84)';
+            overlay.style.transformOrigin = 'bottom right';
+            // overlay.style.padding = '8px';
+            overlay.style.opacity = '0'; // start invisible for fade-in
+            overlay.style.transition = 'opacity 0.5s ease, transform 0.5s ease'; // fade-in
+
+            // Create d2l-alert
+            const alert = document.createElement('d2l-alert');
+            alert.setAttribute('type', 'warning');
+            alert.style.display = 'inline-flex';
+            alert.style.alignItems = 'center';
+            alert.style.maxWidth = '380px';
+            alert.style.marginRight = '8px';
+            alert.style.marginBottom = '8px';
+
+            // Button inside alert
+            const button = document.createElement('d2l-button');
+            button.innerText = 'Manage Course Info';
+            button.style.marginLeft = '10px';
+            button.addEventListener('click', () => {
+                window.open(`/d2l/lp/manageCourses/course_offering_info_viewedit.d2l?ou=${org_unit_id}`, '_blank');
+            });
+
+            alert.innerHTML = 'Site is not active: ';
+            alert.appendChild(button);
+
+            overlay.appendChild(alert);
+            document.body.appendChild(overlay);
+
+            // Trigger fade-in after 200ms
+            setTimeout(() => {
+                overlay.style.opacity = '1';
+            }, 200);
+
+            // Responsive adjustments
+            window.addEventListener('resize', () => adjustOverlayQuarter(overlay, shadowHost));
+            window.addEventListener('scroll', () => adjustOverlayQuarter(overlay, shadowHost));
+        }
+
+        // Adjust overlay size and position for bottom-right quarter
+        function adjustOverlayQuarter(overlay, host) {
+            const rect = host.getBoundingClientRect();
+            overlay.style.width = `${rect.width / 2}px`;
+            overlay.style.height = `${rect.height / 2}px`;
+            overlay.style.top = `${rect.top + window.scrollY + rect.height / 2}px`;
+            overlay.style.left = `${rect.left + window.scrollX + rect.width / 2}px`;
+        }
+
+        // Start the process
+        fetchCourseAndOverlay();
+    }
+});
+</script>
+</p>
